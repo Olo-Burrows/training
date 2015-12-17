@@ -1,0 +1,13 @@
+{
+    id: 'luke',
+    name: 'Luke SKYWALKER',
+    password: 'luke'
+}, {
+    id: 'han',
+    name: 'Han SOLO',
+    password: 'han'
+}, {
+    id: 'leia',
+    name: 'Leia ORGANA',
+    password: 'leia'
+}
