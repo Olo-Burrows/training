@@ -1,16 +1,33 @@
 "use strict";
 
 app.service("Users", function ($http) {
-    var users = [{
-        id: 0,
-        name: 'Luke SKYWALKER'
+    var users,
+        getById;
+
+    users = [{
+        id: 'luke',
+        name: 'Luke SKYWALKER',
+        password: 'luke'
     }, {
-        id: 1,
-        name: 'Han SOLO'
+        id: 'han',
+        name: 'Han SOLO',
+        password: 'han'
     }, {
-        id: 3,
-        name: 'Leia ORGANA'
+        id: 'leia',
+        name: 'Leia ORGANA',
+        password: 'leia'
     }];
+
+    getById = function (id) {
+        var user;
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].id == id) {
+                user = users[i];
+                break;
+            }
+        }
+        return user;
+    };
 
     return {
         fetch: function () {
@@ -18,7 +35,7 @@ app.service("Users", function ($http) {
         },
 
         fetchOne: function (id) {
-            return users[id];
+            return getById(id);
         }
     };
 });

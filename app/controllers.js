@@ -1,7 +1,7 @@
 "use strict";
 
 app.controller("HomeCtrl", function($scope, Users) {
-   $scope.user = Users.fetchOne(0);
+   $scope.user = Users.fetchOne('luke');
 });
 
 app.controller("TrainingsCtrl", function($scope, $location, Trainings) {
