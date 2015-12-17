@@ -10,16 +10,24 @@
     <script src="/bower_components/angular-material/angular-material.min.js"></script>
     
     <script src="/app/main.js"></script>
+    <script src="/app/controllers.js"></script>
+    <script src="/app/services.js"></script>
     
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
 </head>
 <body>
-    
-    <div ng-view></div>
 
-    <div>
+    <header>
+        <h1>Softeam training</h1>
         <md-button class="md-primary" ng-href="#/home">Retour à l'accueil</md-button>
-    </div>
+    </header>
+
+    <section ng-view></section>
+
+    <footer>
+        <span class=".md-caption">Julien BOUYER</span>
+    </footer>
+
 </body>
 </html>

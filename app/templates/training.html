@@ -1,0 +1,17 @@
+<div ng-controller="TrainingsCtrl">
+    <label for="trainingName">Nom</label>&nbsp;
+    <input id="trainingName" ng-model="newTraining.name" ng-required="true">
+    <br>
+    <label for="trainingDescription">Description</label>
+    <br>
+    <input id="trainingDescription" ng-model="newTraining.description">
+    <br>
+    <label for="trainingName">Durée</label>&nbsp;
+    <input id="trainingDuration" ng-model="newTraining.duration">
+    <br>
+    <label for="trainingLink">Lien</label>&nbsp;
+    <input id="trainingLink" ng-model="newTraining.link">
+    <br>
+    <!--            <button type="button" class="btn btn-primary btn-sm" ng-click="addNewTraining()">&#10003;</button>-->
+    <md-button class="md-raised md-primary" ng-click="add()">Ajouter</md-button>
+</div>
