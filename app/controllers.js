@@ -1,7 +1,9 @@
 "use strict";
 
-app.controller("HomeCtrl", function($scope, Users) {
-   $scope.user = Users.fetchOne('luke');
+app.controller("HomeCtrl", function($scope, Users, Trainings) {
+    Users.load();
+    Trainings.load();
+    $scope.user = Users.fetchOne('luke');
 });
 
 app.controller("TrainingsCtrl", function($scope, $location, Trainings) {
@@ -11,6 +13,7 @@ app.controller("TrainingsCtrl", function($scope, $location, Trainings) {
         $location.path("training");
     };
     $scope.add = function () {
+        $scope.newTraining.id = Trainings.getNewId();
         Trainings.push($scope.newTraining);
         $scope.newTraining = {};
         $location.path("trainings");
