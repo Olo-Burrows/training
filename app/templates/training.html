@@ -1,17 +1,27 @@
-<div ng-controller="TrainingsCtrl">
-    <label for="trainingName">Nom</label>&nbsp;
-    <input id="trainingName" ng-model="newTraining.name" ng-required="true">
-    <br>
-    <label for="trainingDescription">Description</label>
-    <br>
-    <input id="trainingDescription" ng-model="newTraining.description">
-    <br>
-    <label for="trainingName">Durée</label>&nbsp;
-    <input id="trainingDuration" ng-model="newTraining.duration">
-    <br>
-    <label for="trainingLink">Lien</label>&nbsp;
-    <input id="trainingLink" ng-model="newTraining.link">
-    <br>
-    <!--            <button type="button" class="btn btn-primary btn-sm" ng-click="addNewTraining()">&#10003;</button>-->
-    <md-button class="md-raised md-primary" ng-click="add()">Ajouter</md-button>
+<div class="training-form" ng-controller="TrainingsCtrl">
+    <md-button class="md-primary" ng-href="#/home">Retour à l'accueil</md-button>
+
+    <form name="formtraining" method="post" novalidate ng-submit="submit()">
+        <label for="trainingName">Nom</label>
+        <input id="trainingName" name="name" ng-model="training.name" ng-required="true" ng-minlength="3">
+        <div ng-show="formtraining.name.$invalid">
+            <div ng-show="formtraining.name.$error.required" class="error">Obligatoire !</div>
+            <div ng-show="formtraining.name.$error.minlength" class="error">Minimum 3 caractères</div>
+        </div>
+        <br>
+        <label for="trainingDescription">Description</label>
+        <br>
+        <textarea id="trainingDescription" ng-model="training.description"></textarea>
+        <br>
+        <label for="trainingName">Durée</label>
+        <input id="trainingDuration" type="number" name="duration" ng-model="training.duration">
+        <div ng-show="formtraining.duration.$error.url" class="error">Format d'URL invalide !</div>
+        <br>
+        <label for="trainingLink">Lien</label>
+        <input id="trainingLink" type="url" name="link" min="1" ng-model="training.link">
+        <div ng-show="formtraining.link.$error.min" class="error">La durée doit être d'au moins 1 jour !</div>
+        <br>
+        <button type="submit" class="btn btn-primary btn-sm" ng-disabled="formtraining.$invalid">Ajouter</button>
+        <span ng-show="formtraining.$invalid" class="error">Erreur(s) sur le formulaire.</span>
+    </form>
 </div>

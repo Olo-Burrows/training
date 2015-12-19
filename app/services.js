@@ -1,6 +1,36 @@
 "use strict";
 
-app.service("Users", function ($http) {
+app.service("LoginService", function (UsersService) {
+
+    return {
+        login: function (iduser, password) {
+            var user,
+                logged = false;
+            user = UsersService.fetchOne(iduser);
+            if (user && user.password == password) {
+                logged = true;
+                var loggedUser = angular.fromJson(angular.toJson(user));
+                var loggedUser_stringify = JSON.stringify(loggedUser);
+                sessionStorage.setItem("loggedUser", loggedUser_stringify);
+            }
+            sessionStorage.setItem("logged", logged);
+            return logged;
+        },
+        getUser: function () {
+            var user_json = sessionStorage.getItem("loggedUser");
+            return JSON.parse(user_json);
+        },
+        checkConnection: function () {
+            var logged = sessionStorage.getItem("logged");
+            return !logged || logged.toLowerCase() == 'false' ? false : true;
+        },
+        disconnect: function () {
+            sessionStorage.setItem("logged", false);
+        }
+    }
+});
+
+app.service("UsersService", function () {
     var init,
         load,
         loaded = false,
@@ -76,7 +106,7 @@ app.service("Users", function ($http) {
 });
 
 
-app.service("Trainings", function ($http) {
+app.service("TrainingsService", function () {
     var init,
         loaded = false,
         save,

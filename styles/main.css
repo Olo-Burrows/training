@@ -1,7 +1,30 @@
 body {
     font-size: 12px;
 }
-
+footer {
+    margin-top: 20px;
+}
 footer span {
     font-size: 11px;
+}
+
+div.login-form,
+div.training-form {
+    border: 1px solid #ddd;
+    width: 500px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+div.login-form input,
+div.training-form input,
+div.training-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+div.login-form .error,
+div.training-form .error {
+    width: 100%;
+    color: #f00;
 }

@@ -1,26 +1,54 @@
 "use strict";
 
-app.controller("HomeCtrl", function($scope, Users, Trainings) {
-    Users.load();
-    Trainings.load();
-    $scope.user = Users.fetchOne('luke');
+app.controller("LoginCtrl", function ($scope, $location, UsersService, LoginService) {
+    if (LoginService.checkConnection()) {
+        $location.path("/home");
+    }
+
+    UsersService.load();
+    $scope.login = function () {
+        if (LoginService.login($scope.iduser, $scope.password)) {
+            $location.path("/home");
+        } else {
+            $scope.message = "Utilisateur inconnu ou mauvais mot de passe.";
+        }
+    };
 });
 
-app.controller("TrainingsCtrl", function($scope, $location, Trainings) {
-    $scope.trainings = Trainings.fetch();
+app.controller("HomeCtrl", function ($scope, $location, UsersService, LoginService, TrainingsService) {
+    if (!LoginService.checkConnection()) {
+        $location.path("/");
+    }
+    TrainingsService.load();
+    $scope.user = UsersService.fetchOne('luke');
+
+    $scope.disconnect = function () {
+        LoginService.disconnect();
+        $location.path("/");
+    };
+ });
+
+app.controller("TrainingsCtrl", function ($scope, $location, TrainingsService, LoginService) {
+    if (!LoginService.checkConnection()) {
+        $location.path("/");
+    }
+    $scope.trainings = TrainingsService.fetch();
 
     $scope.addNewTraining = function () {
-        $location.path("training");
+        $location.path("/training");
     };
-    $scope.add = function () {
-        Trainings.push($scope.newTraining);
-        $scope.newTraining = {};
-        $location.path("trainings");
+    $scope.submit = function () {
+        TrainingsService.push($scope.training);
+        $scope.training = {};
+        $location.path("/trainings");
     };
 });
 
-app.controller("TrainingCtrl", function($scope, Trainings) {
-    $scope.remove = function(index) {
-        Trainings.delete(index);
+app.controller("TrainingCtrl", function ($scope, $location, TrainingsService, LoginService) {
+    if (!LoginService.checkConnection()) {
+        $location.path("/");
+    }
+    $scope.remove = function (index) {
+        TrainingsService.delete(index);
     };
 });

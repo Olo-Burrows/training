@@ -1,0 +1,10 @@
+<div class="login-form" ng-controller="LoginCtrl">
+    <form name="loginform" method="post" novalidate ng-submit="login()">
+        <label for="iduser">Identifiant</label>
+        <input id="user" name="iduser" ng-model="iduser" ng-required="true">
+        <label for="password">Mot de passe</label>
+        <input id="password" type="password" name="password" ng-model="password" ng-required="true">
+        <button type="submit" class="btn btn-primary btn-sm" ng-disabled="loginform.$invalid">Connection</button>
+        <div>{{message}}</div>
+    </form>
+</div>
