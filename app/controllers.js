@@ -13,7 +13,6 @@ app.controller("TrainingsCtrl", function($scope, $location, Trainings) {
         $location.path("training");
     };
     $scope.add = function () {
-        $scope.newTraining.id = Trainings.getNewId();
         Trainings.push($scope.newTraining);
         $scope.newTraining = {};
         $location.path("trainings");

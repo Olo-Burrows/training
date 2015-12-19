@@ -156,6 +156,7 @@ app.service("Trainings", function ($http) {
         },
 
         push: function (training) {
+            training.id = trainings.length;
             trainings.push(training);
             save();
         },
@@ -163,10 +164,6 @@ app.service("Trainings", function ($http) {
         delete: function (index) {
             trainings.splice(index, 1);
             save();
-        },
-
-        getNewId: function () {
-            return trainings.length;
         }
     };
 });
