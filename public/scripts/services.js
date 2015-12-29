@@ -79,10 +79,12 @@ app.service("UsersService", function () {
         },
 
         fetch: function () {
+            this.load();
             return users;
         },
 
         fetchOne: function (id) {
+            this.load();
             var user;
             for (var i = 0; i < users.length; i++) {
                 if (users[i].id == id) {
@@ -171,10 +173,12 @@ app.service("TrainingsService", function () {
         },
 
         fetch: function () {
+            this.load();
             return trainings;
         },
 
         fetchOne: function (id) {
+            this.load();
             var training;
             for (var i = 0; i < trainings.length; i++) {
                 if (trainings[i].id == id) {
