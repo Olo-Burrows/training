@@ -2,6 +2,12 @@
 
 ## GESTION DES FORMATIONS SOFTEAM
 
+### Run
+
+In debug mode :
+
+`DEBUG=myapp:* npm start`
+
 
 ### TODO
 
