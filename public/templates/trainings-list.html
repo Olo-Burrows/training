@@ -2,8 +2,14 @@
     <h1 class="md-title">Liste des formations Softeam</h1>
     <md-button class="md-primary" ng-href="#/home">Retour à l'accueil</md-button>
 
+    <div>
+        <h4>Filters</h4>
+        <label>
+            Text : <input ng-model="trainingText"/>
+        </label>
+    </div>
     <ul>
-        <li ng-repeat="training in trainings" ng-controller="TrainingCtrl">
+        <li ng-repeat="training in trainings | filter:trainingText" ng-controller="TrainingCtrl">
             <sftm-training training="training" edit="edit($index)" remove="remove($index)"></sftm-training>
         </li>
     </ul>
