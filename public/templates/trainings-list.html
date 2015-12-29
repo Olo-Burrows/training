@@ -4,12 +4,8 @@
 
     <ul>
         <li ng-repeat="training in trainings" ng-controller="TrainingCtrl">
-            <div>
-                <h2 class="md-subhead">{{training.name}}</h2>
-                <span>{{training.description}}</span>
-                <span>Durée : {{training.duration}} jour{{(training.duration > 1) ? 's' : ''}}</span>
-                <span>Lien : <a href="{{training.link}}">{{training.link}}</a></span>
-            </div>
+            <sftm-training training="training"></sftm-training>
+            
             <button class="btn btn-success btn-xs" aria-label="Modifier" ng-click="edit($index)"><span class="glyphicon glyphicon-edit"></span></button>
             <button class="btn btn-danger btn-xs" aria-label="Supprimer" ng-click="remove($index)"><span class="glyphicon glyphicon-remove"></span></button>
         </li>
