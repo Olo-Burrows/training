@@ -4,10 +4,7 @@
 
     <ul>
         <li ng-repeat="training in trainings" ng-controller="TrainingCtrl">
-            <sftm-training training="training"></sftm-training>
-            
-            <button class="btn btn-success btn-xs" aria-label="Modifier" ng-click="edit($index)"><span class="glyphicon glyphicon-edit"></span></button>
-            <button class="btn btn-danger btn-xs" aria-label="Supprimer" ng-click="remove($index)"><span class="glyphicon glyphicon-remove"></span></button>
+            <sftm-training training="training" edit="edit($index)" remove="remove($index)"></sftm-training>
         </li>
     </ul>
 
