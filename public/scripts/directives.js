@@ -5,7 +5,12 @@ app.directive("sftmTraining", function () {
         restrict: 'E',
         replace: true,
         scope : {
-            training: "=training"
+            // same as '=training'
+            training: "=",
+            // same as '&edit'
+            edit: '&',
+            // same as '&remove'
+            remove: '&'
         },
         templateUrl: "templates/training-template.html"
     };

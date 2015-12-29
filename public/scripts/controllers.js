@@ -50,9 +50,11 @@ app.controller("TrainingCtrl", function ($scope, $location, TrainingsService, Lo
     }
     $scope.edit = function (index) {
         console.log(index);
+        // var id = $scope.trainings[index].id;
         // $location.path("/training");
-    }
+    };
     $scope.remove = function (index) {
+        console.log(index);
         TrainingsService.delete(index);
     };
 });
