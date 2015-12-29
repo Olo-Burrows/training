@@ -10,10 +10,11 @@
                 <span>Durée : {{training.duration}} jour{{(training.duration > 1) ? 's' : ''}}</span>
                 <span>Lien : <a href="{{training.link}}">{{training.link}}</a></span>
             </div>
-            <md-button class="md-fab md-mini md-primary" aria-label="Supprimer" ng-click="remove($index)">x</md-button>
+            <button class="btn btn-success btn-xs" aria-label="Modifier" ng-click="edit($index)"><span class="glyphicon glyphicon-edit"></span></button>
+            <button class="btn btn-danger btn-xs" aria-label="Supprimer" ng-click="remove($index)"><span class="glyphicon glyphicon-remove"></span></button>
         </li>
     </ul>
 
-    <md-button class="md-raised md-primary" ng-click="addNewTraining()">Ajouter une formation</md-button>
+    <button class="btn btn-primary btn-sm" ng-click="addNewTraining()">Ajouter une formation</button>
 
 </div>

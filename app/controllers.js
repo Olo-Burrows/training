@@ -48,6 +48,10 @@ app.controller("TrainingCtrl", function ($scope, $location, TrainingsService, Lo
     if (!LoginService.checkConnection()) {
         $location.path("/");
     }
+    $scope.edit = function (index) {
+        console.log(index);
+        // $location.path("/training");
+    }
     $scope.remove = function (index) {
         TrainingsService.delete(index);
     };
