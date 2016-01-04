@@ -1,7 +1,6 @@
 "use strict";
 
-app.controller("LoginCtrl", function ($scope, $location, UsersService, LoginService) {
-    UsersService.load();
+app.controller("LoginCtrl", function ($scope, $location, LoginService) {
     $scope.login = function () {
         if (LoginService.login($scope.iduser, $scope.password)) {
             $location.path("/home");

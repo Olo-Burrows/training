@@ -29,3 +29,14 @@ app.directive("checkConnection", function ($location, LoginService) {
         }
     };
 });
+
+app.directive("usersLoader", function (UsersService) {
+   return {
+       restrict: 'E',
+       replace: false,
+       scope: {},
+       link: function (scope) {
+           UsersService.load();
+       }
+   }
+});
