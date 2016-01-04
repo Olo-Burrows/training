@@ -3,8 +3,8 @@
 var app = angular.module("softeam-training", [ 'ngRoute', 'ngMaterial' ]);
 
 app.config(function ($routeProvider) {
-    $routeProvider.when('/home', {
-        templateUrl: 'templates/home.html'
+    $routeProvider.when('/login', {
+        templateUrl: 'templates/login.html'
     }).when('/trainings', {
         templateUrl: 'templates/trainings-list.html',
         controller: 'TrainingsCtrl'
@@ -13,6 +13,6 @@ app.config(function ($routeProvider) {
     }).when('/formers', {
         templateUrl: 'templates/formers-list.html'
     }).otherwise({
-        templateUrl: 'templates/login.html'
+        templateUrl: 'templates/home.html'
     });
 });
