@@ -8,6 +8,15 @@ footer span {
     font-size: 11px;
 }
 
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+li {
+    margin-bottom: 15px;
+}
+
 div.login-form,
 div.training-form {
     border: 1px solid #ddd;
@@ -27,4 +36,14 @@ div.login-form .error,
 div.training-form .error {
     width: 100%;
     color: #f00;
+}
+
+li div.sftm-training {
+    padding-left: 10px;
+}
+li div.sftm-training div {
+    padding-left: 10px;
+}
+li div.sftm-training button {
+    margin: 10px;
 }
