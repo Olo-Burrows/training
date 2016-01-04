@@ -10,13 +10,8 @@ app.controller("LoginCtrl", function ($scope, $location, LoginService) {
     };
 });
 
-app.controller("HomeCtrl", function ($scope, $location, UsersService, LoginService) {
+app.controller("HomeCtrl", function ($scope, UsersService) {
     $scope.user = UsersService.fetchOne('luke');
-
-    $scope.disconnect = function () {
-        LoginService.disconnect();
-        $location.path("/");
-    };
  });
 
 app.controller("TrainingsCtrl", function ($scope, $location, TrainingsService) {

@@ -51,3 +51,17 @@ app.directive("trainingsLoader", function (TrainingsService) {
        }
    }
 });
+
+app.directive("btnDisconnect", function ($location, LoginService) {
+    return {
+        restrict: 'E',
+        replace: true,
+        link: function (scope) {
+            scope.disconnect = function () {
+                LoginService.disconnect();
+                $location.path("/");
+            }
+        },
+        template: '<div><button class="btn btn-primary btn-sm" ng-click="disconnect()">Déconnexion</button></div>'
+    }
+});
