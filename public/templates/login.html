@@ -1,4 +1,6 @@
 <div class="login-form" ng-controller="LoginCtrl">
+    <check-connection/>
+
     <form name="loginform" method="post" novalidate ng-submit="login()">
         <label for="iduser">Identifiant</label>
         <input id="user" name="iduser" ng-model="iduser" ng-required="true">

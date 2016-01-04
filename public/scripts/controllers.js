@@ -1,10 +1,6 @@
 "use strict";
 
 app.controller("LoginCtrl", function ($scope, $location, UsersService, LoginService) {
-    if (LoginService.checkConnection()) {
-        $location.path("/home");
-    }
-
     UsersService.load();
     $scope.login = function () {
         if (LoginService.login($scope.iduser, $scope.password)) {
@@ -16,9 +12,6 @@ app.controller("LoginCtrl", function ($scope, $location, UsersService, LoginServ
 });
 
 app.controller("HomeCtrl", function ($scope, $location, UsersService, LoginService, TrainingsService) {
-    if (!LoginService.checkConnection()) {
-        $location.path("/");
-    }
     TrainingsService.load();
     $scope.user = UsersService.fetchOne('luke');
 
@@ -29,9 +22,6 @@ app.controller("HomeCtrl", function ($scope, $location, UsersService, LoginServi
  });
 
 app.controller("TrainingsCtrl", function ($scope, $location, TrainingsService, LoginService) {
-    if (!LoginService.checkConnection()) {
-        $location.path("/");
-    }
     $scope.trainings = TrainingsService.fetch();
 
     $scope.addNewTraining = function () {
@@ -45,9 +35,6 @@ app.controller("TrainingsCtrl", function ($scope, $location, TrainingsService, L
 });
 
 app.controller("TrainingCtrl", function ($scope, $location, TrainingsService, LoginService) {
-    if (!LoginService.checkConnection()) {
-        $location.path("/");
-    }
     $scope.edit = function (index) {
         console.log(index);
         // var id = $scope.trainings[index].id;

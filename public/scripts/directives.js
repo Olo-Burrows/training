@@ -15,3 +15,17 @@ app.directive("sftmTraining", function () {
         templateUrl: "templates/training-template.html"
     };
 });
+
+app.directive("checkConnection", function ($location, LoginService) {
+    return {
+        restrict: 'AE',
+        replace: false,
+        scope: {},
+        link: function (scope) {
+            var connected = LoginService.checkConnection();
+            if (!connected) {
+                $location.path("/login");
+            }
+        }
+    };
+});
