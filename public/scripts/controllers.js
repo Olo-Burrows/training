@@ -19,7 +19,7 @@ app.controller("HomeCtrl", function ($scope, $location, UsersService, LoginServi
     };
  });
 
-app.controller("TrainingsCtrl", function ($scope, $location, TrainingsService, LoginService) {
+app.controller("TrainingsCtrl", function ($scope, $location, TrainingsService) {
     $scope.trainings = TrainingsService.fetch();
 
     $scope.addNewTraining = function () {
@@ -32,7 +32,7 @@ app.controller("TrainingsCtrl", function ($scope, $location, TrainingsService, L
     };
 });
 
-app.controller("TrainingCtrl", function ($scope, $location, TrainingsService, LoginService) {
+app.controller("TrainingCtrl", function ($scope, $location, TrainingsService) {
     $scope.edit = function (index) {
         console.log(index);
         // var id = $scope.trainings[index].id;
