@@ -1,8 +1,44 @@
 body {
     font-size: 12px;
 }
+
+header {
+    position: fixed;
+    height: 100px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    overflow: hidden;
+    background-color: #a22;
+    color: #fdfdfd;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.5);
+}
+
+header h1 {
+    padding-left: 20px;
+    padding-top: 7px;
+}
+
+section {
+    position: relative;
+    display: block;
+    margin: 100px auto 0;
+    padding: 20px 20px 0;
+    width: 940px;
+}
+
+section h1 {
+    color: #646464;
+    border-bottom: 1px solid #b2b2b2;
+}
+
 footer {
-    margin-top: 20px;
+    border-top: 1px solid #b2b2b2;
+    margin: 20px auto;
+    padding: 10px;
+    width: 940px;
+    color: #646464;
 }
 footer span {
     font-size: 11px;
