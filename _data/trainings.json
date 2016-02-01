@@ -1,35 +1,31 @@
 {
-    "id": 0,
+    "_id": 0,
     "name": "AngularJS",
     "description": "La formation AngularJS est top !",
     "link": "https://git.softeam.fr/angularjs-formation",
-    "duration": 3,
-    "$$hashKey": "object:15"
+    "duration": 3
 }, {
-    "id": 1,
+    "_id": 1,
     "name": "Java POO",
     "description": "Formation à Java et la programmation orientée objets.",
     "link": "https://git.softeam.fr/java-poo-formation",
-    "duration": 4,
-    "$$hashKey": "object:16"
+    "duration": 4
 }, {
-    "id": 2,
+    "_id": 2,
     "name": "JSF2",
     "description": "Formation JSF2 pour tout savoir sur JavaServer Faces v2.",
     "link": "https://git.softeam.fr/jsf2-formation",
-    "duration": 2,
-    "$$hashKey": "object:17"
+    "duration": 2
 }, {
-    "id": 3,
+    "_id": 3,
     "name": "Formation HTML JavaScript",
     "description": "Cette formation détient les bases sur HTML et JavaScript.",
     "link": "https://git.softeam.fr/html-js-formation",
-    "duration": 2,
-    "$$hashKey": "object:18"
+    "duration": 2
 }, {
+    "_id": 4,
     "name": "ABC",
     "description": "Formation Alphabet",
-    "duration": "10",
     "link": "www",
-    "id": 4
+    "duration": 10
 }

@@ -20,6 +20,14 @@ app.controller("TrainingsCtrl", function ($scope, $location, TrainingsService) {
     $scope.addNewTraining = function () {
         $location.path("/training");
     };
+    $scope.remove = function (index) {
+        console.log(index);
+        $scope.training = TrainingsService.delete(index);
+    };
+});
+
+app.controller("TrainingCtrl", function ($scope, $location, TrainingsService) {
+
     $scope.submit = function () {
         TrainingsService.push($scope.training);
         $scope.training = {};
@@ -27,14 +35,19 @@ app.controller("TrainingsCtrl", function ($scope, $location, TrainingsService) {
     };
 });
 
-app.controller("TrainingCtrl", function ($scope, $location, TrainingsService) {
-    $scope.edit = function (index) {
-        console.log(index);
-        // var id = $scope.trainings[index].id;
-        // $location.path("/training");
+app.controller("EditTrainingCtrl", function ($scope, $location, $routeParams, TrainingsService) {
+    
+    var trainingId = $routeParams.id;
+    
+    $scope.training = TrainingsService.fetchOne(trainingId);
+    
+    $scope.update = function () {
+//        console.log(training);
+        TrainingsService.update($scope.training);
+        $location.path("/trainings");
     };
-    $scope.remove = function (index) {
-        console.log(index);
-        TrainingsService.delete(index);
+    
+    $scope.back = function () {
+        $location.path("/trainings");
     };
 });

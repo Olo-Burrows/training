@@ -3,9 +3,9 @@
     <div>{{training.description}}</div>
     <div>Durée : {{training.duration | duration}}</div>
     <div>Lien : <a href="{{training.link}}" target="_blank">{{training.link}}</a></div>
-    <button class="btn btn-success btn-xs" aria-label="Modifier" ng-click="edit()">
+    <a class="btn btn-success btn-xs" aria-label="Modifier" href="#/trainings/edit/{{training._id}}">
         <span class="glyphicon glyphicon-edit"></span>
-    </button>
+    </a>
     <button class="btn btn-danger btn-xs" aria-label="Supprimer" ng-click="remove()">
         <span class="glyphicon glyphicon-remove"></span>
     </button>

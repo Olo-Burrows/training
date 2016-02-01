@@ -40,15 +40,15 @@ app.service("UsersService", function () {
     init = function () {
         console.log("init users");
         users = [{
-            id: 'luke',
+            _id: 'luke',
             name: 'Luke SKYWALKER',
             password: 'luke'
         }, {
-            id: 'han',
+            _id: 'han',
             name: 'Han SOLO',
             password: 'han'
         }, {
-            id: 'leia',
+            _id: 'leia',
             name: 'Leia ORGANA',
             password: 'leia'
         }];
@@ -87,7 +87,7 @@ app.service("UsersService", function () {
             this.load();
             var user;
             for (var i = 0; i < users.length; i++) {
-                if (users[i].id == id) {
+                if (users[i]._id == id) {
                     user = users[i];
                     break;
                 }
@@ -118,31 +118,31 @@ app.service("TrainingsService", function () {
         console.log("init trainings");
         trainings = [
             {
-                id: 0,
+                _id: 0,
                 name: "AngularJS",
                 description: "La formation AngularJS est top !",
                 link: "https://git.softeam.fr/angularjs-formation",
                 duration: 3
             }, {
-                id: 1,
+                _id: 1,
                 name: "Java POO",
                 description: "Formation à Java et la programmation orientée objets.",
                 link: "https://git.softeam.fr/java-poo-formation",
                 duration: 4
             }, {
-                id: 2,
+                _id: 2,
                 name: "JSF2",
                 description: "Formation JSF2 pour tout savoir sur JavaServer Faces v2.",
                 link: "https://git.softeam.fr/jsf2-formation",
                 duration: 2
             }, {
-                id: 3,
+                _id: 3,
                 name: "Formation HTML JavaScript",
                 description: "Cette formation détient les bases sur HTML et JavaScript.",
                 link: "https://git.softeam.fr/html-js-formation",
                 duration: 2
             }/*, {
-                id: 0,
+                _id: 0,
                 name: "",
                 description: "",
                 link: "",
@@ -181,7 +181,7 @@ app.service("TrainingsService", function () {
             this.load();
             var training;
             for (var i = 0; i < trainings.length; i++) {
-                if (trainings[i].id == id) {
+                if (trainings[i]._id == id) {
                     training = trainings[i];
                     break;
                 }
@@ -190,14 +190,24 @@ app.service("TrainingsService", function () {
         },
 
         push: function (training) {
-            training.id = trainings.length;
+            training._id = trainings.length;
             trainings.push(training);
             save();
         },
-
-        delete: function (index) {
-            trainings.splice(index, 1);
+        
+        update: function (training) {
+            var t = this.fetchOne(training._id);
+            t.name = training.name;
+            t.description = training.description;
+            t.link = training.link;
+            t.duration = training.duration;
             save();
+        },
+
+        delete: function (id) {
+            trainings.splice(id, 1);
+            save();
+            return trainings;
         }
     };
 });

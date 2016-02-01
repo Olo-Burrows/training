@@ -9,7 +9,11 @@ app.config(function ($routeProvider) {
         templateUrl: 'templates/trainings-list.html',
         controller: 'TrainingsCtrl'
     }).when('/training', {
-        templateUrl: 'templates/training.html'
+        templateUrl: 'templates/training.html',
+        controller: 'TrainingCtrl'
+    }).when('/trainings/edit/:id', {
+        templateUrl: 'templates/edit-training.html',
+        controller: 'EditTrainingCtrl'
     }).when('/formers', {
         templateUrl: 'templates/formers-list.html'
     }).otherwise({

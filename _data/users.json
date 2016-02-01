@@ -1,13 +1,13 @@
 {
-    id: 'luke',
+    _id: 'luke',
     name: 'Luke SKYWALKER',
     password: 'luke'
 }, {
-    id: 'han',
+    _id: 'han',
     name: 'Han SOLO',
     password: 'han'
 }, {
-    id: 'leia',
+    _id: 'leia',
     name: 'Leia ORGANA',
     password: 'leia'
 }

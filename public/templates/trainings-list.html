@@ -1,4 +1,4 @@
-<div ng-controller="TrainingsCtrl">
+<div>
     <check-connection/>
 
     <h1 class="md-title">Liste des formations Softeam</h1>
@@ -11,8 +11,8 @@
         </label>
     </div>
     <ul>
-        <li ng-repeat="training in trainings | filter:trainingText" ng-controller="TrainingCtrl">
-            <sftm-training training="training" edit="edit($index)" remove="remove($index)"></sftm-training>
+        <li ng-repeat="training in trainings | filter:trainingText">
+            <sftm-training training="training" remove="remove($index)"></sftm-training>
         </li>
     </ul>
 
