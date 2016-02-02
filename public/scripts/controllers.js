@@ -15,7 +15,11 @@ app.controller("HomeCtrl", function ($scope, UsersService) {
  });
 
 app.controller("TrainingsCtrl", function ($scope, $location, TrainingsService) {
-    $scope.trainings = TrainingsService.fetch();
+    TrainingsService.fetch().success(function (resp) {
+        $scope.trainings = resp;
+    }).error(function (data, status, headers, config) {
+        console.error(data);
+    });
 
     $scope.addNewTraining = function () {
         $location.path("/training");
@@ -29,7 +33,7 @@ app.controller("TrainingsCtrl", function ($scope, $location, TrainingsService) {
 app.controller("TrainingCtrl", function ($scope, $location, TrainingsService) {
 
     $scope.submit = function () {
-        TrainingsService.push($scope.training);
+        TrainingsService.create($scope.training);
         $scope.training = {};
         $location.path("/trainings");
     };

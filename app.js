@@ -5,13 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var trainings = require('./routes/trainings');
-// var users = require('./routes/users');
-
 // config files
 var db = require('./db/config');
 //console.log(':: TRAININGS :: db');
 //console.log(db);
+
+var trainings = require('./routes/trainings');
+// var users = require('./routes/users');
 
 var app = express();
 

@@ -2,8 +2,14 @@
 const low = require('lowdb');
 //low.mixin(require('underscore-db'));
 const storage = require('lowdb/file-async');
+//const _   = require('underscore');
+//const _db = require('underscore-db');
+//_.mixin(_db);
 
 const db = low('_data/db.json', { storage: storage });
+db._.mixin(require('underscore-db'));
+
+//console.log(module);
 
 (function (db) {
     console.log(':: DB CONFIG :: trainings');
@@ -16,32 +22,36 @@ const db = low('_data/db.json', { storage: storage });
     if (trainings.size() == 0) {
         console.log(':: DB CONFIG :: init trainings');
         
-        db('trainings').push({
-            id: 0,
+        db('trainings').insert({
+//            id: 0,
             name: "AngularJS",
             description: "La formation AngularJS est top !",
             link: "https://git.softeam.fr/angularjs-formation",
             duration: 3
-        }, {
-            id: 1,
+        });
+        db('trainings').insert({
+//            id: 1,
             name: "Java POO",
             description: "Formation à Java et la programmation orientée objets.",
             link: "https://git.softeam.fr/java-poo-formation",
             duration: 4
-        }, {
-            id: 2,
+        });
+        db('trainings').insert({
+//            id: 2,
             name: "JSF2",
             description: "Formation JSF2 pour tout savoir sur JavaServer Faces v2.",
             link: "https://git.softeam.fr/jsf2-formation",
             duration: 2
-        }, {
-            id: 3,
+        });
+        db('trainings').insert({
+//            id: 3,
             name: "Formation HTML JavaScript",
             description: "Cette formation détient les bases sur HTML et JavaScript.",
             link: "https://git.softeam.fr/html-js-formation",
             duration: 2
-        }, {
-            id: 4,
+        });
+        db('trainings').insert({
+//            id: 4,
             name: "ABC",
             description: "Formation Alphabet",
             link: "www",
@@ -79,4 +89,4 @@ const db = low('_data/db.json', { storage: storage });
     }
 })(db);
 
-module.exports.db = db;
+module.exports = db;
