@@ -25,8 +25,9 @@ app.controller("TrainingsCtrl", function ($scope, $location, TrainingsService) {
         $location.path("/training");
     };
     $scope.remove = function (index) {
-        console.log(index);
-        $scope.training = TrainingsService.delete(index);
+        TrainingsService.remove($scope.trainings[index].id).success(function (resp) {
+            $scope.trainings.splice(index, 1);
+        });
     };
 });
 
@@ -48,6 +49,8 @@ app.controller("EditTrainingCtrl", function ($scope, $location, $routeParams, Tr
     $scope.update = function () {
 //        console.log(training);
         TrainingsService.update($scope.training);
+        $scope.training = {};
+        $scope.dismiss();
         $location.path("/trainings");
     };
     

@@ -41,17 +41,6 @@ app.directive("usersLoader", function (UsersService) {
    }
 });
 
-//app.directive("trainingsLoader", function (TrainingsService) {
-//   return {
-//       restrict: 'E',
-//       replace: false,
-//       scope: {},
-//       link: function (scope) {
-//           TrainingsService.load();
-//       }
-//   }
-//});
-
 app.directive("btnDisconnect", function ($location, LoginService) {
     return {
         restrict: 'E',

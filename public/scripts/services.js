@@ -109,69 +109,9 @@ app.service("UsersService", function () {
 
 
 app.service("TrainingsService", function ($http) {
-    var /*init,*/
-        loaded = false,
-        save,
-        trainings,
-        API_URI = '/server/api/trainings';
-
-//    init = function () {
-//        console.log("init trainings");
-//        trainings = [
-//            {
-//                _id: 0,
-//                name: "AngularJS",
-//                description: "La formation AngularJS est top !",
-//                link: "https://git.softeam.fr/angularjs-formation",
-//                duration: 3
-//            }, {
-//                _id: 1,
-//                name: "Java POO",
-//                description: "Formation à Java et la programmation orientée objets.",
-//                link: "https://git.softeam.fr/java-poo-formation",
-//                duration: 4
-//            }, {
-//                _id: 2,
-//                name: "JSF2",
-//                description: "Formation JSF2 pour tout savoir sur JavaServer Faces v2.",
-//                link: "https://git.softeam.fr/jsf2-formation",
-//                duration: 2
-//            }, {
-//                _id: 3,
-//                name: "Formation HTML JavaScript",
-//                description: "Cette formation détient les bases sur HTML et JavaScript.",
-//                link: "https://git.softeam.fr/html-js-formation",
-//                duration: 2
-//            }/*, {
-//                _id: 0,
-//                name: "",
-//                description: "",
-//                link: "",
-//                duration: 0
-//            }*/
-//        ];
-//        save();
-//    };
-
-    save = function () {
-        trainings = angular.fromJson(angular.toJson(trainings));
-        var trainings_stringify = JSON.stringify(trainings);
-        localStorage.setItem("trainings", trainings_stringify);
-    };
-
+    var API_URI = '/server/api/trainings';
 
     return {
-//        load: function () {
-//            if (!localStorage.getItem("trainings")) {
-//                init();
-//            }
-//            if (!loaded) {
-//                console.log("loading trainings");
-//                var trainings_json = localStorage.getItem("trainings");
-//                trainings = JSON.parse(trainings_json);
-//                loaded = true;
-//            }
-//        },
 
         fetch: function () {
             return $http.get(API_URI);
@@ -182,22 +122,15 @@ app.service("TrainingsService", function ($http) {
         },
 
         create: function (training) {
-            $http.post(API_URI, training);
+            return $http.post(API_URI, training);
         },
         
         update: function (training) {
-            var t = this.fetchOne(training._id);
-            t.name = training.name;
-            t.description = training.description;
-            t.link = training.link;
-            t.duration = training.duration;
-            save();
+            return false;
         },
 
-        delete: function (id) {
-            trainings.splice(id, 1);
-            save();
-            return trainings;
+        remove: function (id) {
+            return $http.delete(API_URI + "/" + id);
         }
     };
 });

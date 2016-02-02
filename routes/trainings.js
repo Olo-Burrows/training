@@ -35,6 +35,7 @@ router.route('/server/api/trainings/:id')
         console.log(':: TRAININGS :: put training');
     })
     .delete(function (req, res) {
-        console.log(':: TRAININGS :: delete training');
+        var training = db(DB_NAME).removeById(req.params.id);
+        res.send(training);
     });
 module.exports = router;
