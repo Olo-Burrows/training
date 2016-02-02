@@ -32,7 +32,6 @@ app.controller("TrainingsCtrl", function ($scope, $location, TrainingsService) {
 });
 
 app.controller("TrainingCtrl", function ($scope, $location, TrainingsService) {
-
     $scope.submit = function () {
         TrainingsService.create($scope.training);
         $scope.training = {};
@@ -44,13 +43,14 @@ app.controller("EditTrainingCtrl", function ($scope, $location, $routeParams, Tr
     
     var trainingId = $routeParams.id;
     
-    $scope.training = TrainingsService.fetchOne(trainingId);
+    TrainingsService.fetchOne(trainingId).success(function (resp) {
+        $scope.training = resp;
+    });
     
     $scope.update = function () {
 //        console.log(training);
         TrainingsService.update($scope.training);
         $scope.training = {};
-        $scope.dismiss();
         $location.path("/trainings");
     };
     

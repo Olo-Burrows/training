@@ -126,7 +126,7 @@ app.service("TrainingsService", function ($http) {
         },
         
         update: function (training) {
-            return false;
+            return $http.put(API_URI + "/" + training.id, training);
         },
 
         remove: function (id) {

@@ -27,14 +27,19 @@ router.route('/server/api/trainings')
 
 router.route('/server/api/trainings/:id')
     .get(function (req, res) {
-        console.log(':: TRAININGS :: get 1 training');
+        console.log(':: TRAININGS :: get training / id : ' + req.params.id);
         var training = db(DB_NAME).getById(req.params.id);
         res.send(training);
     })
     .put(function (req, res) {
-        console.log(':: TRAININGS :: put training');
+        console.log(':: TRAININGS :: update training / id : ' + req.params.id);
+        var id = req.params.id,
+            training = req.body;
+        var upTraining = db(DB_NAME).updateById(id, training);
+        res.send(upTraining);
     })
     .delete(function (req, res) {
+        console.log(':: TRAININGS :: delete training / id : ' + req.params.id);
         var training = db(DB_NAME).removeById(req.params.id);
         res.send(training);
     });
