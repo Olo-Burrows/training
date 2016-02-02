@@ -5,4 +5,4 @@
 **/bower_components
 **/node_modules
 
-_data/db.json
+_data/db.json*
