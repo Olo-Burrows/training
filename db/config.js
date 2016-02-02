@@ -72,20 +72,21 @@ db._.mixin(require('underscore-db'));
     if (users.size() == 0) {
         console.log(':: DB CONFIG :: init users');
         
-        db('users').push({
+        db('users').insert({
             id: 'luke',
             name: 'Luke SKYWALKER',
             password: 'luke'
-        }, {
+        });
+        db('users').insert({
             id: 'han',
             name: 'Han SOLO',
             password: 'han'
-        }, {
+        });
+        db('users').insert({
             id: 'leia',
             name: 'Leia ORGANA',
             password: 'leia'
         });
-//        console.log(db);
     }
 })(db);
 

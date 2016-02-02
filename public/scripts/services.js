@@ -1,20 +1,22 @@
 "use strict";
 
-app.service("LoginService", function (UsersService) {
+app.service("LoginService", function (UsersService, $rootScope) {
 
     return {
         login: function (iduser, password) {
             var user,
                 logged = false;
-            user = UsersService.fetchOne(iduser);
-            if (user && user.password == password) {
-                logged = true;
-                var loggedUser = angular.fromJson(angular.toJson(user));
-                var loggedUser_stringify = JSON.stringify(loggedUser);
-                sessionStorage.setItem("loggedUser", loggedUser_stringify);
-            }
-            sessionStorage.setItem("logged", logged);
-            return logged;
+            
+            UsersService.fetchOne(iduser).success(function (user) {
+                if (user && user.password == password) {
+                    logged = true;
+                    var loggedUser = angular.fromJson(angular.toJson(user));
+                    var loggedUser_stringify = JSON.stringify(loggedUser);
+                    sessionStorage.setItem("loggedUser", loggedUser_stringify);
+                }
+                sessionStorage.setItem("logged", logged);
+                $rootScope.$broadcast('logged', logged);
+            });
         },
         getUser: function () {
             var user_json = sessionStorage.getItem("loggedUser");
@@ -30,79 +32,29 @@ app.service("LoginService", function (UsersService) {
     }
 });
 
-app.service("UsersService", function () {
-    var init,
-        load,
-        loaded = false,
-        save,
-        users;
-
-    init = function () {
-        console.log("init users");
-        users = [{
-            _id: 'luke',
-            name: 'Luke SKYWALKER',
-            password: 'luke'
-        }, {
-            _id: 'han',
-            name: 'Han SOLO',
-            password: 'han'
-        }, {
-            _id: 'leia',
-            name: 'Leia ORGANA',
-            password: 'leia'
-        }];
-        save();
-    };
-
-    load = function () {
-        if (!loaded) {
-            console.log("loading users");
-            var users_json = localStorage.getItem("users");
-            users = JSON.parse(users_json);
-            loaded = true;
-        }
-    };
-
-    save = function () {
-        users = angular.fromJson(angular.toJson(users));
-        var users_stringify = JSON.stringify(users);
-        localStorage.setItem("users", users_stringify);
-    };
+app.service("UsersService", function ($http) {
+    var API_URI = '/server/api/users';
 
     return {
-        load: function () {
-            if (!localStorage.getItem("users")) {
-                init();
-            }
-            load();
-        },
 
         fetch: function () {
-            this.load();
-            return users;
+            return $http.get(API_URI);
         },
 
         fetchOne: function (id) {
-            this.load();
-            var user;
-            for (var i = 0; i < users.length; i++) {
-                if (users[i]._id == id) {
-                    user = users[i];
-                    break;
-                }
-            }
-            return user;
+            return $http.get(API_URI + '/' + id);
         },
 
-        push: function (user) {
-            users.push(user);
-            save();
+        create: function (user) {
+            return $http.post(API_URI, user);
+        },
+        
+        update: function (user) {
+            return $http.put(API_URI + "/" + user.id, user);
         },
 
-        delete: function (index) {
-            users.splice(index, 1);
-            save();
+        remove: function (id) {
+            return $http.delete(API_URI + "/" + id);
         }
     };
 });

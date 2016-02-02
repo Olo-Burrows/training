@@ -2,16 +2,19 @@
 
 app.controller("LoginCtrl", function ($scope, $location, LoginService) {
     $scope.login = function () {
-        if (LoginService.login($scope.iduser, $scope.password)) {
-            $location.path("/home");
-        } else {
-            $scope.message = "Utilisateur inconnu ou mauvais mot de passe.";
-        }
+        LoginService.login($scope.iduser, $scope.password);
+        $scope.$on('logged', function (event, logged) {
+            if (logged) {
+                $location.path("/home");
+            } else {
+                $scope.message = "Utilisateur inconnu ou mauvais mot de passe.";
+            }
+        });
     };
 });
 
-app.controller("HomeCtrl", function ($scope, UsersService) {
-    $scope.user = UsersService.fetchOne('luke');
+app.controller("HomeCtrl", function ($scope, LoginService) {
+    $scope.user = LoginService.getUser();
  });
 
 app.controller("TrainingsCtrl", function ($scope, $location, TrainingsService) {

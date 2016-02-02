@@ -30,17 +30,6 @@ app.directive("checkConnection", function ($location, LoginService) {
     };
 });
 
-app.directive("usersLoader", function (UsersService) {
-   return {
-       restrict: 'E',
-       replace: false,
-       scope: {},
-       link: function (scope) {
-           UsersService.load();
-       }
-   }
-});
-
 app.directive("btnDisconnect", function ($location, LoginService) {
     return {
         restrict: 'E',
