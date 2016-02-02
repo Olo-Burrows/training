@@ -1,13 +1,13 @@
-{
-    _id: 'luke',
+db('users').push({
+    id: 'luke',
     name: 'Luke SKYWALKER',
     password: 'luke'
 }, {
-    _id: 'han',
+    id: 'han',
     name: 'Han SOLO',
     password: 'han'
 }, {
-    _id: 'leia',
+    id: 'leia',
     name: 'Leia ORGANA',
     password: 'leia'
-}
+})
