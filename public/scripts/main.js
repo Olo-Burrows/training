@@ -15,7 +15,11 @@ app.config(function ($routeProvider) {
         templateUrl: 'templates/edit-training.html',
         controller: 'EditTrainingCtrl'
     }).when('/formers', {
-        templateUrl: 'templates/formers-list.html'
+        templateUrl: 'templates/formers-list.html',
+        controller: 'UsersCtrl'
+    }).when('/user', {
+        templateUrl: 'templates/user.html',
+        controller: 'UserCtrl'
     }).otherwise({
         templateUrl: 'templates/home.html'
     });

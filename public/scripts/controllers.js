@@ -61,3 +61,30 @@ app.controller("EditTrainingCtrl", function ($scope, $location, $routeParams, Tr
         $location.path("/trainings");
     };
 });
+
+app.controller("UsersCtrl", function ($scope, $location, UsersService) {
+    UsersService.fetch().success(function (users) {
+        $scope.users = users;
+    }).error(function (data, status, headers, config) {
+        console.error(data);
+    });
+
+    $scope.addNewUser = function () {
+        // TODO check current user has Admin role
+        $location.path("/user");
+    };
+    $scope.remove = function (index) {
+        // TODO check current user has Admin role
+        UsersService.remove($scope.users[index].id).success(function (resp) {
+            $scope.users.splice(index, 1);
+        });
+    };
+});
+
+app.controller("UserCtrl", function ($scope, $location, UsersService) {
+    $scope.submit = function () {
+        UsersService.create($scope.user);
+        $scope.training = {};
+        $location.path("/formers");
+    };
+});

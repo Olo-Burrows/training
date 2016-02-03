@@ -1,11 +1,47 @@
-<div ng-controller="TrainingsCtrl">
+<div>
     <check-connection/>
 
     <h1 class="md-title">Liste des formateurs Softeam</h1>
     <md-button class="md-primary" ng-href="#/home">Retour à l'accueil</md-button>
 
     <div>
-        Coming soon...
+        <h4>Filters</h4>
+        <input class="span5" type="text" ng-model="search" placeholder="Rechercher">
+        <button class="btn btn-info" ng-click="tri = 'lastname'; reverse = !reverse">Trier par Nom</button>
+        <button class="btn btn-info" ng-click="tri = 'site'; reverse = !reverse">Trier par Site</button>
+        <button class="btn btn-info" ng-click="tri = 'role'; reverse = !reverse">Trier par Role</button>
+    </div>
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Site de rattachement</th>
+                <th>Rôle</th>
+                <th>&nbsp;<!--Actions--></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in users | orderBy:tri:reverse | filter : search ">
+                <td>{{$index + 1}}</td>
+                <td>{{user.lastname}}</td>
+                <td>{{user.firstname}}</td>
+                <td>{{user.site}}</td>
+                <td>{{user.role}}</td>
+                <td>
+                    <a class="btn btn-success btn-xs" aria-label="Modifier" href="#/users/edit/{{user.id}}">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                    <button class="btn btn-danger btn-xs" aria-label="Supprimer" ng-click="remove($index)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-primary btn-sm" ng-click="addNewUser()">Ajouter un formateur</button>
     </div>
 
 </div>

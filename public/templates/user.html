@@ -1,0 +1,36 @@
+<div class="user-form">
+    <check-connection/>
+
+    <md-button class="md-primary" ng-href="#/home">Retour à l'accueil</md-button>
+
+    <form name="formuser" method="post" novalidate ng-submit="submit()">
+        <label for="userId">Identifiant</label>
+        <input id="userId" name="id" ng-model="user.id" ng-required="true" ng-minlength="2">
+        <div ng-show="formuser.userId.$invalid">
+            <div ng-show="formuser.userId.$error.required" class="error">Obligatoire !</div>
+            <div ng-show="formuser.userId.$error.minlength" class="error">Minimum 2 caractères</div>
+        </div>
+        <br>
+        <label for="userLastname">Nom</label>
+        <input id="userLastname" name="lastname" ng-model="user.lastname">
+        <br>
+        <label for="userFirstname">Prénom</label>
+        <input id="userFirstname" name="firstname" ng-model="user.firstname">
+        <br>
+        <label for="userPassword">Mot de passe</label>
+        <input id="userPassword" name="password" type="password" ng-model="user.password">
+        <br>
+        <label for="userSite">Site de rattachement</label>
+        <select id="userSite" name="site" ng-model="user.site">
+            <option value="Nantes">Nantes</option>
+            <option value="Rennes">Rennes</option>
+            <option value="Paris">Paris</option>
+        </select>
+        <br>
+        <label for="userRole">Rôle</label>
+        <input id="userRole" name="role" ng-model="user.role">
+        <br>
+        <button type="submit" class="btn btn-primary btn-sm" ng-disabled="formtraining.$invalid">Ajouter</button>
+        <span ng-show="formtraining.$invalid" class="error">Erreur(s) sur le formulaire.</span>
+    </form>
+</div>

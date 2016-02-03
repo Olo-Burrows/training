@@ -73,21 +73,23 @@ db._.mixin(require('underscore-db'));
         console.log(':: DB CONFIG :: init users');
         
         db('users').insert({
-            id: 'luke',
-            name: 'Luke SKYWALKER',
-            password: 'luke'
+            id: 'jb',
+            lastname: 'BOUYER',
+            firstname: 'Julien',
+            password: 'jb',
+            site: 'Nantes',
+            role: ''
         });
         db('users').insert({
-            id: 'han',
-            name: 'Han SOLO',
-            password: 'han'
-        });
-        db('users').insert({
-            id: 'leia',
-            name: 'Leia ORGANA',
-            password: 'leia'
+            id: 'admin',
+            lastname: 'admin',
+            firstname: '',
+            password: 'admin',
+            site: 'Nantes',
+            role: 'admin'
         });
     }
 })(db);
+
 
 module.exports = db;

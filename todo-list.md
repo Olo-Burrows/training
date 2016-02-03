@@ -11,8 +11,9 @@
 	* &#x2611; Description
 	* &#x2611; Lien git
 	* &#x2611; Nombre de jours
-    * &#x2610; Dernière session
-    * &#x2610; Prochaine session
+    * &#x2610; Sessions
+    * &#x2610; Afficher dernière session
+    * &#x2610; Afficher prochaine session
 
 * &#x2610; Session
     * &#x2610; Formateur
@@ -20,11 +21,13 @@
     * &#x2610; Date
     * &#x2610; Lieu
 
-* &#x2610; Formateur
+* &#x2610; Formateur/Utilisateur
+	* &#x2610; Id
 	* &#x2610; Nom
 	* &#x2610; Prénom
+	* &#x2610; Mot de passe
 	* &#x2610; Site de rattachement
-	* &#x2610; Role
+	* &#x2610; Rôle
 
 * &#x2611; Authentification
 
