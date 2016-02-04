@@ -30,7 +30,8 @@
         <label for="userRole">Rôle</label>
         <input id="userRole" name="role" ng-model="user.role">
         <br>
-        <button type="submit" class="btn btn-primary btn-sm" ng-disabled="formtraining.$invalid">Ajouter</button>
+        <button type="button" class="btn btn-primary btn-sm" ng-click="back()">Annuler</button>
+        <button type="submit" class="btn btn-primary btn-sm" ng-disabled="formtraining.$invalid">Enregistrer</button>
         <span ng-show="formtraining.$invalid" class="error">Erreur(s) sur le formulaire.</span>
     </form>
 </div>

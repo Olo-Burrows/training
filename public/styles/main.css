@@ -56,9 +56,13 @@ li {
 div.login-form,
 div.training-form {
     border: 1px solid #ddd;
-    width: 500px;
     padding: 10px;
+    width: 500px;
     border-radius: 10px;
+}
+div.training-view {
+    width: 100%;
+    padding: 10px;
 }
 
 div.login-form input,
@@ -72,6 +76,20 @@ div.login-form .error,
 div.training-form .error {
     width: 100%;
     color: #f00;
+}
+
+div.training-form label div,
+div.training-form label span,
+div.training-view label div,
+div.training-view label span {
+    font-weight: normal;
+}
+
+div.training-view div.training-name {
+    border-bottom: 1px solid #b2b2b2;
+    font-weight: bold;
+    font-size: 14px;
+    margin: 5px;
 }
 
 li div.sftm-training {

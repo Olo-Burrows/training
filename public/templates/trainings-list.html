@@ -7,15 +7,54 @@
     <div>
         <h4>Filters</h4>
         <label>
-            Text : <input ng-model="trainingText"/>
+            Text :
+            <input ng-model="trainingText" />
         </label>
+        <button class="btn btn-primary btn-sm" ng-click="addNewTraining()">Ajouter une formation</button>
+        <button class="btn btn-success" ng-click="toggleView()"><i ng-class="tableViewIcon"></i></button>
     </div>
-    <ul>
-        <li ng-repeat="training in trainings | filter:trainingText">
-            <sftm-training training="training" remove="remove($index)"></sftm-training>
-        </li>
-    </ul>
-
-    <button class="btn btn-primary btn-sm" ng-click="addNewTraining()">Ajouter une formation</button>
+    <div ng-switch on="tableView">
+        <table class="table table-striped" ng-swith-when="false">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nom</th>
+                    <th>Durée</th>
+                    <th>Lien</th>
+                    <th>Date prochaine session</th>
+                    <th>Date dernière session</th>
+                    <th>
+                        <!--Actions-->
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="training in trainings | filter:trainingText">
+                    <td>{{$index + 1}}</td>
+                    <td>{{training.name}}</td>
+                    <td>{{training.duration | duration}}</td>
+                    <td><a href="{{training.link}}" target="_blank">{{training.link}}</a></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <a class="btn btn-primary btn-xs" aria-label="Consulter" href="#/trainings/view/{{training.id}}">
+                            <i class="glyphicon glyphicon-eye-open"></i>
+                        </a>
+                        <a class="btn btn-success btn-xs" aria-label="Modifier" href="#/trainings/edit/{{training.id}}">
+                            <i class="glyphicon glyphicon-edit"></i>
+                        </a>
+                        <button class="btn btn-danger btn-xs" aria-label="Supprimer" ng-click="remove()">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul class="thumbnails" ng-switch-default>
+            <li ng-repeat="training in trainings | filter:trainingText">
+                <sftm-training training="training" remove="remove($index)"></sftm-training>
+            </li>
+        </ul>
+    </div>
 
 </div>

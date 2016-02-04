@@ -18,6 +18,23 @@ app.controller("HomeCtrl", function ($scope, LoginService) {
  });
 
 app.controller("TrainingsCtrl", function ($scope, $location, TrainingsService) {
+
+    // display mode by default
+    $scope.tableView = false;
+    // icon by mode by default
+    $scope.tableViewIcon = 'glyphicon glyphicon-th';
+    
+    // function called when changing view mode
+    $scope.toogleView = function () {
+        $scope.tableView = !$scope.tableView;
+
+        if ($scope.tableView === false) {
+            $scope.tableViewIcon = 'glyphicon glyphicon-th';
+        } else {
+            $scope.tableViewIcon = 'glyphicon glyphicon-th-list';
+        }
+    };
+
     TrainingsService.fetch().success(function (resp) {
         $scope.trainings = resp;
     }).error(function (data, status, headers, config) {
@@ -35,9 +52,17 @@ app.controller("TrainingsCtrl", function ($scope, $location, TrainingsService) {
 });
 
 app.controller("TrainingCtrl", function ($scope, $location, TrainingsService) {
+    
+    $scope.mode = "Creation";
+    $scope.trainingClass = "training-form";
+    
     $scope.submit = function () {
         TrainingsService.create($scope.training);
         $scope.training = {};
+        $location.path("/trainings");
+    };
+    
+    $scope.cancel = function () {
         $location.path("/trainings");
     };
 });
@@ -45,21 +70,37 @@ app.controller("TrainingCtrl", function ($scope, $location, TrainingsService) {
 app.controller("EditTrainingCtrl", function ($scope, $location, $routeParams, TrainingsService) {
     
     var trainingId = $routeParams.id;
+    $scope.trainingClass = "training-form";
+    
+    $scope.mode = "Edit";
     
     TrainingsService.fetchOne(trainingId).success(function (resp) {
         $scope.training = resp;
     });
     
-    $scope.update = function () {
+    $scope.submit = function () {
 //        console.log(training);
         TrainingsService.update($scope.training);
         $scope.training = {};
         $location.path("/trainings");
     };
     
-    $scope.back = function () {
+    $scope.cancel = function () {
         $location.path("/trainings");
     };
+});
+
+app.controller("ViewTrainingCtrl", function ($scope, $location, $routeParams, TrainingsService) {
+    
+    var trainingId = $routeParams.id;
+    $scope.trainingClass = "training-view";
+    
+    $scope.mode = "View";
+    
+    TrainingsService.fetchOne(trainingId).success(function (resp) {
+        $scope.training = resp;
+    });
+    
 });
 
 app.controller("UsersCtrl", function ($scope, $location, UsersService) {
@@ -84,7 +125,32 @@ app.controller("UsersCtrl", function ($scope, $location, UsersService) {
 app.controller("UserCtrl", function ($scope, $location, UsersService) {
     $scope.submit = function () {
         UsersService.create($scope.user);
-        $scope.training = {};
+        $scope.user = {};
+        $location.path("/formers");
+    };
+    
+    $scope.back = function () {
+        $scope.user = {};
+        $location.path("/formers");
+    };
+});
+
+app.controller("EditUserCtrl", function ($scope, $location, $routeParams, UsersService) {
+    
+    var userId = $routeParams.id;
+    
+    UsersService.fetchOne(userId).success(function (user) {
+        $scope.user = user;
+    });
+    
+    $scope.submit = function () {
+        UsersService.update($scope.user);
+        $scope.user = {};
+        $location.path("/formers");
+    };
+    
+    $scope.back = function () {
+        $scope.user = {};
         $location.path("/formers");
     };
 });
