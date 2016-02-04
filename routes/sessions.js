@@ -37,11 +37,8 @@ router.route('/server/api/sessions/:id')
     .put(function (req, res) {
         console.log(':: SESSIONS :: update session / id : ' + req.params.id);
         var id = req.params.id;
-        db(DB_NAME).updateById(id, req.body).then(function (session) {
-            res.send(session);
-        }, function (err) {
-            // Rejet de la promesse
-        });
+        db(DB_NAME).updateById(id, req.body);
+        res.send();
     })
     .delete(function (req, res) {
         console.log(':: SESSIONS :: delete session / id : ' + req.params.id);
