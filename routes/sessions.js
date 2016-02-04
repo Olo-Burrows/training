@@ -47,4 +47,14 @@ router.route('/server/api/sessions/:id')
         console.log(':: SESSIONS :: delete session / id : ' + req.params.id);
         var session = db(DB_NAME).removeById(req.params.id);
         res.send(session);
-    }); module.exports = router;
+    });
+
+router.route('/server/api/sessions/past/trainingId/:trainingId')
+    .get(function (req, res) {
+        console.log(':: SESSIONS :: get past sessions / trainingId : ' + req.params.trainingId);
+        var sessions = db(DB_NAME).find({trainingId: req.params.trainingId});
+        res.send(sessions);
+    });
+
+//
+module.exports = router;

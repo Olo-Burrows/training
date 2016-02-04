@@ -83,7 +83,7 @@ app.directive("sftmDatePicker", function ($location, LoginService) {
             };
 //
 //            scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-            scope.format = 'dd-MMMM-yyyy';
+            scope.format = 'dd-MM-yyyy';
 //            scope.altInputFormats = ['M!/d!/yyyy'];
 
             scope.popup = {

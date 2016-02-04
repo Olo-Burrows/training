@@ -96,6 +96,14 @@ app.service("SessionsService", function ($http) {
         fetchOne: function (id) {
             return $http.get(API_URI + '/' + id);
         },
+        
+        fetchPastFromTrainingId: function (trainingId) {
+            return $http.get(API_URI + '/past/trainingId/' + trainingId);
+        },
+        
+        fetchComingFromTrainingId: function (trainingId) {
+            return null;
+        },
 
         create: function (session) {
             return $http.post(API_URI, session);

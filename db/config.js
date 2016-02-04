@@ -1,13 +1,14 @@
 // DB 
 const low = require('lowdb');
-//low.mixin(require('underscore-db'));
 const storage = require('lowdb/file-async');
+
+const db = low('_data/db.json', { storage: storage });
+db._.mixin(require('underscore-db'));
+
 //const _   = require('underscore');
 //const _db = require('underscore-db');
 //_.mixin(_db);
 
-const db = low('_data/db.json', { storage: storage });
-db._.mixin(require('underscore-db'));
 
 //console.log(module);
 

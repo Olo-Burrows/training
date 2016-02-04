@@ -93,45 +93,52 @@ app.controller("EditTrainingCtrl", function ($scope, $location, $routeParams, Tr
 app.controller("ViewTrainingCtrl", function ($scope, $location, $routeParams, $uibModal, TrainingsService, SessionsService)  {
     var trainingId, getSessions;
 
+    $scope.sessions = [];
     $scope.trainingClass = "training-view";
     $scope.mode = "View";
-
+    
     trainingId = $routeParams.id;
 
     getSessions = function () {
-        $.each($scope.training.sessionIds, function (idx, value) {
-
+        SessionsService.fetchPastFromTrainingId($scope.training.id).success(function (sessions) {
+            $scope.sessions = sessions;
         });
     }
+
+    $scope.$watchCollection("sessions", function(newValue, oldValue) {
+        console.log(newValue);
+        console.log(oldValue);
+    });
 
     TrainingsService.fetchOne(trainingId).success(function (resp) {
         $scope.training = resp;
         getSessions();
     });
-
+    
     $scope.addSession = function () {
         var modalInstance = $uibModal.open({
+            animation: true,
             templateUrl: 'templates/add-session-modal.html',
-            controller: 'CreateSessionCtrl'
+            controller: 'CreateSessionCtrl',
+            resolve: {
+                trainingId: function () {
+                    return $scope.training.id;
+                }
+            }
         });
 
         modalInstance.result.then(function (session) {
-            var newSession = {};
-            angular.copy(session, newSession);
-            if (!$scope.training.sessionIds) {
-                $scope.training.sessionIds = [];
-            }
-            $scope.training.sessionIds.push(newSession.id);
-            TrainingsService.update($scope.training);
+            $scope.sessions.push(session);
         });
     };
 });
 
-app.controller("CreateSessionCtrl", function ($scope, $uibModalInstance, SessionsService) {
+app.controller("CreateSessionCtrl", function ($scope, $uibModalInstance, trainingId, SessionsService) {
 
     $scope.showAlert = false;
 
     $scope.addSession = function (session) {
+        session.trainingId = trainingId;
         SessionsService.create(session).success(function (resp) {
             $scope.session = {};
             $scope.showAlert = false;

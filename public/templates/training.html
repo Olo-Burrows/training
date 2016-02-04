@@ -4,8 +4,9 @@
     <md-button class="md-primary" ng-href="#/home">Retour à l'accueil</md-button>
     <md-button class="md-primary" ng-href="#/trainings" ng-show="{{mode == 'View'}}">Retour aux formations</md-button>
 
+    <h1 class="md-title" ng-show="mode == 'View'">{{training.name}}</h1>
+    
     <form name="formtraining" method="post" novalidate ng-submit="submit()" class="form-horizontal">
-        <div class="training-name" ng-show="mode == 'View'">{{training.name}}</div>
         <label for="trainingName" ng-show="mode != 'View'">Nom</label>
         <input id="trainingName" name="name" ng-model="training.name" ng-required="true" ng-minlength="3" class="form-control" ng-show="mode != 'View'">
         <div ng-show="formtraining.name.$invalid && mode != 'View'">
@@ -30,10 +31,9 @@
         <br>
         <div ng-show="mode == 'View'">
             <button type="submit" class="btn btn-primary btn-sm" ng-disabled="formtraining.$invalid" ng-click="addSession()"><i class="glyphicon glyphicon-plus"></i>Ajouter une session</button>
-            <div>Liste prochaines sessions</div>
-            <div ng-show="!training.sessionIds">Il n'y a pas de session</div>
-            <div>{{training.sessionIds}}</div>
-            <table ng-show="training.sessionIds">
+            <h4>Liste des sessions à venir</h4>
+            <div ng-show="!sessions || sessions.length == 0">Il n'y a pas de session</div>
+            <table class="table table-striped" ng-show="sessions &&  sessions.length > 0">
             <thead>
             <tr>
                 <td>#</td>
@@ -46,14 +46,15 @@
             <tbody>
             <tr ng-repeat="session in sessions">
                 <td>{{$index + 1}}</td>
-                <td>{{session.date}}</td>
+                <td>{{session.date | date:'dd-MM-yyyy'}}</td>
                 <td>{{session.place}}</td>
                 <td>{{session.formerid}}</td>
-                <td>{{session.time}}</td>
+                <td>{{session.time | hours}}</td>
             </tr>
             </tbody>
             </table>
-            <div>Liste sessions passées</div>
+            
+            <h4>Liste des sessions passées</h4>
         </div>
         <div ng-show="mode != 'View'">
             <button type="submit" class="btn btn-primary btn-sm" ng-disabled="formtraining.$invalid">Enregistrer</button>
