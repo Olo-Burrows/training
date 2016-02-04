@@ -1,0 +1,43 @@
+<header class="modal-header">
+    <button type="button" class="close" ng-click="close()">x</button>
+    <!--    <button type="button" class="close" data-dismiss="modal">x</button>-->
+    <h3>Ajouter une session</h3>
+</header>
+<section class="modal-body">
+    <div class='alert alert-danger' ng-show="showAlert">
+        <h4>{{errorTitle}}</h4>
+        <p>{{errorMessage}}</p>
+    </div>
+    <form name="sessionForm" class="form-horizontal">
+        <div class="control-group" ng-class="{error : sessionForm.inputDate.$error.pattern}">
+            <label class="control-label">Date de début :</label>
+                <sftm-date-picker ng-model="session.date"></sftm-date-picker>
+<!--            <sftm-date-picker ng-model="session.date"></sftm-date-picker>-->
+<!--            <input type="text" name="inputDate" ng-model="session.releaseYear" ng-pattern="/(19|20)\d\d/">-->
+<!--            <span class="help-block" ng-show="sessionForm.inputDate.$error.pattern">L'année n'est pas valide</span>-->
+        </div>
+        <div class="control-group">
+            <label class="control-label">Lieu :</label>
+            <select id="sessionPlace" name="site" ng-model="session.place" class="form-control">
+                <option value="Nantes">Nantes</option>
+                <option value="Rennes">Rennes</option>
+                <option value="Paris">Paris</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Formateur : </label>
+            <!--            <director mode="edit" ng-model="session.director"></director>-->
+            <input type="text" ng-model="session.fomerId" class="form-control">
+        </div>
+        <div class="control-group" ng-class="{error : sessionForm.inputTime.$error.min || sessionForm.inputTime.$error.max}">
+            <label class="control-label">Temps de préparation (en heures) :</label>
+            <input type="number" name="inputTime" placeholder="entre 1 et 40" ng-model="session.time" min="0" max="40" class="form-control">
+            <span class="help-block" ng-show="sessionForm.inputTime.$error.min">La note doit être supérieure à 0</span>
+            <span class="help-block" ng-show="sessionForm.inputTime.$error.max">La note doit être inférieure à 40</span>
+        </div>
+    </form>
+</section>
+<footer class="modal-footer">
+    <button class="btn btn-danger btn-small" ng-click="close();">Annuler</button>
+    <button class="btn btn-success" ng-click="addSession(session)" ng-disabled="sessionForm.$invalid">Ajouter</button>
+</footer>

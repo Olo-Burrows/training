@@ -91,5 +91,17 @@ db._.mixin(require('underscore-db'));
     }
 })(db);
 
+(function (db) {
+    console.log(':: DB CONFIG :: sessions');
+//    console.log(db);
+    
+    var sessions = db('sessions');
+    console.log(':: DB CONFIG :: sessions size');
+    console.log(sessions.size());
+    
+    if (sessions.size() == 0) {
+        console.log(':: DB CONFIG :: init sessions');
+    }
+})(db);
 
 module.exports = db;

@@ -15,7 +15,7 @@ app.controller("LoginCtrl", function ($scope, $location, LoginService) {
 
 app.controller("HomeCtrl", function ($scope, LoginService) {
     $scope.user = LoginService.getUser();
- });
+});
 
 app.controller("TrainingsCtrl", function ($scope, $location, TrainingsService) {
 
@@ -23,7 +23,7 @@ app.controller("TrainingsCtrl", function ($scope, $location, TrainingsService) {
     $scope.tableView = false;
     // icon by mode by default
     $scope.tableViewIcon = 'glyphicon glyphicon-th';
-    
+
     // function called when changing view mode
     $scope.toogleView = function () {
         $scope.tableView = !$scope.tableView;
@@ -52,55 +52,98 @@ app.controller("TrainingsCtrl", function ($scope, $location, TrainingsService) {
 });
 
 app.controller("TrainingCtrl", function ($scope, $location, TrainingsService) {
-    
+
     $scope.mode = "Creation";
     $scope.trainingClass = "training-form";
-    
+
     $scope.submit = function () {
         TrainingsService.create($scope.training);
         $scope.training = {};
         $location.path("/trainings");
     };
-    
+
     $scope.cancel = function () {
         $location.path("/trainings");
     };
 });
 
 app.controller("EditTrainingCtrl", function ($scope, $location, $routeParams, TrainingsService) {
-    
+
     var trainingId = $routeParams.id;
     $scope.trainingClass = "training-form";
-    
+
     $scope.mode = "Edit";
-    
+
     TrainingsService.fetchOne(trainingId).success(function (resp) {
         $scope.training = resp;
     });
-    
+
     $scope.submit = function () {
-//        console.log(training);
+        //        console.log(training);
         TrainingsService.update($scope.training);
         $scope.training = {};
         $location.path("/trainings");
     };
-    
+
     $scope.cancel = function () {
         $location.path("/trainings");
     };
 });
 
-app.controller("ViewTrainingCtrl", function ($scope, $location, $routeParams, TrainingsService) {
-    
-    var trainingId = $routeParams.id;
+app.controller("ViewTrainingCtrl", function ($scope, $location, $routeParams, $uibModal, TrainingsService, SessionsService)  {
+    var trainingId, getSessions;
+
     $scope.trainingClass = "training-view";
-    
     $scope.mode = "View";
-    
+
+    trainingId = $routeParams.id;
+
+    getSessions = function () {
+        $.each($scope.training.sessionIds, function (idx, value) {
+
+        });
+    }
+
     TrainingsService.fetchOne(trainingId).success(function (resp) {
         $scope.training = resp;
+        getSessions();
     });
-    
+
+    $scope.addSession = function () {
+        var modalInstance = $uibModal.open({
+            templateUrl: 'templates/add-session-modal.html',
+            controller: 'CreateSessionCtrl'
+        });
+
+        modalInstance.result.then(function (session) {
+            var newSession = {};
+            angular.copy(session, newSession);
+            if (!$scope.training.sessionIds) {
+                $scope.training.sessionIds = [];
+            }
+            $scope.training.sessionIds.push(newSession.id);
+            TrainingsService.update($scope.training);
+        });
+    };
+});
+
+app.controller("CreateSessionCtrl", function ($scope, $uibModalInstance, SessionsService) {
+
+    $scope.showAlert = false;
+
+    $scope.addSession = function (session) {
+        SessionsService.create(session).success(function (resp) {
+            $scope.session = {};
+            $scope.showAlert = false;
+            $uibModalInstance.close(resp);
+        });
+    };
+
+    $scope.close = function () {
+        $scope.session = {};
+        $scope.showAlert = false;
+        $uibModalInstance.dismiss('cancel');
+    };
 });
 
 app.controller("UsersCtrl", function ($scope, $location, UsersService) {
@@ -128,7 +171,7 @@ app.controller("UserCtrl", function ($scope, $location, UsersService) {
         $scope.user = {};
         $location.path("/formers");
     };
-    
+
     $scope.back = function () {
         $scope.user = {};
         $location.path("/formers");
@@ -136,19 +179,19 @@ app.controller("UserCtrl", function ($scope, $location, UsersService) {
 });
 
 app.controller("EditUserCtrl", function ($scope, $location, $routeParams, UsersService) {
-    
+
     var userId = $routeParams.id;
-    
+
     UsersService.fetchOne(userId).success(function (user) {
         $scope.user = user;
     });
-    
+
     $scope.submit = function () {
         UsersService.update($scope.user);
         $scope.user = {};
         $location.path("/formers");
     };
-    
+
     $scope.back = function () {
         $scope.user = {};
         $location.path("/formers");

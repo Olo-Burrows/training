@@ -4,35 +4,55 @@
     <md-button class="md-primary" ng-href="#/home">Retour à l'accueil</md-button>
     <md-button class="md-primary" ng-href="#/trainings" ng-show="{{mode == 'View'}}">Retour aux formations</md-button>
 
-    <form name="formtraining" method="post" novalidate ng-submit="submit()">
+    <form name="formtraining" method="post" novalidate ng-submit="submit()" class="form-horizontal">
         <div class="training-name" ng-show="mode == 'View'">{{training.name}}</div>
-        <label for="trainingName" ng-show="mode != 'View'">Nom
-            <input id="trainingName" name="name" ng-model="training.name" ng-required="true" ng-minlength="3">
-        </label>
+        <label for="trainingName" ng-show="mode != 'View'">Nom</label>
+        <input id="trainingName" name="name" ng-model="training.name" ng-required="true" ng-minlength="3" class="form-control" ng-show="mode != 'View'">
         <div ng-show="formtraining.name.$invalid && mode != 'View'">
             <div ng-show="formtraining.name.$error.required" class="error">Obligatoire !</div>
             <div ng-show="formtraining.name.$error.minlength" class="error">Minimum 3 caractères</div>
         </div>
-        <br>
-        <label for="trainingDescription" ng-switch on="mode">Description
-            <div ng-switch-when="View">{{training.description}}</div>
-            <textarea id="trainingDescription" ng-model="training.description" ng-switch-default></textarea>
-        </label>
-        <br>
-        <label for="trainingName" ng-switch on="mode">Durée
-            <span ng-switch-when="View">{{training.duration | duration}}</span>
-            <input id="trainingDuration" type="number" name="duration" ng-model="training.duration" ng-switch-default>
-        </label>
-        <div ng-show="formtraining.duration.$error.url && mode != 'View'" class="error">Format d'URL invalide !</div>
-        <br>
-        <label for="trainingLink" ng-switch on="mode">Lien
-            <a href="{{training.link}}" target="_blank" ng-switch-when="View">{{training.link}}</a>
-            <input id="trainingLink" type="url" name="link" min="1" ng-model="training.link" ng-switch-default>
-        </label>
+        
+        <label for="trainingDescription">Description</label>
+        <div ng-show="mode == 'View'">{{training.description}}</div>
+        <textarea id="trainingDescription" ng-model="training.description" class="form-control" ng-show="mode != 'View'"></textarea>
+        
+        <label for="trainingName">Durée</label>
+        <span ng-show="mode == 'View'">{{training.duration | duration}}</span>
+        <input id="trainingDuration" type="number" name="duration" ng-model="training.duration" class="form-control" ng-show="mode != 'View'">
         <div ng-show="formtraining.link.$error.min && mode != 'View'" class="error">La durée doit être d'au moins 1 jour !</div>
+        
+        <label for="trainingLink">Lien</label>
+        <a href="{{training.link}}" target="_blank" ng-show="mode == 'View'">{{training.link}}</a>
+        <input id="trainingLink" type="url" name="link" min="1" ng-model="training.link" class="form-control" ng-show="mode != 'View'">
+        <div ng-show="formtraining.duration.$error.url && mode != 'View'" class="error">Format d'URL invalide !</div>
+        
+        <br>
         <div ng-show="mode == 'View'">
             <button type="submit" class="btn btn-primary btn-sm" ng-disabled="formtraining.$invalid" ng-click="addSession()"><i class="glyphicon glyphicon-plus"></i>Ajouter une session</button>
             <div>Liste prochaines sessions</div>
+            <div ng-show="!training.sessionIds">Il n'y a pas de session</div>
+            <div>{{training.sessionIds}}</div>
+            <table ng-show="training.sessionIds">
+            <thead>
+            <tr>
+                <td>#</td>
+                <td>Date</td>
+                <td>Lieu</td>
+                <td>Formateur</td>
+                <td>Temps de préparation</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="session in sessions">
+                <td>{{$index + 1}}</td>
+                <td>{{session.date}}</td>
+                <td>{{session.place}}</td>
+                <td>{{session.formerid}}</td>
+                <td>{{session.time}}</td>
+            </tr>
+            </tbody>
+            </table>
             <div>Liste sessions passées</div>
         </div>
         <div ng-show="mode != 'View'">

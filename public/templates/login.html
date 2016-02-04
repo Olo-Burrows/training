@@ -1,11 +1,11 @@
 <div class="login-form" ng-controller="LoginCtrl">
     <check-connection/>
 
-    <form name="loginform" method="post" novalidate ng-submit="login()">
+    <form name="loginform" method="post" novalidate ng-submit="login()" class="form-horizontal">
         <label for="iduser">Identifiant</label>
-        <input id="user" name="iduser" ng-model="iduser" ng-required="true">
+        <input id="user" name="iduser" ng-model="iduser" ng-required="true" class="form-control">
         <label for="password">Mot de passe</label>
-        <input id="password" type="password" name="password" ng-model="password" ng-required="true">
+        <input id="password" type="password" name="password" ng-model="password" ng-required="true" class="form-control">
         <button type="submit" class="btn btn-primary btn-sm" ng-disabled="loginform.$invalid">Connection</button>
         <div>{{message}}</div>
     </form>

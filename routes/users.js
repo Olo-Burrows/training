@@ -20,7 +20,11 @@ router.route('/server/api/users')
     })
     .post(function (req, res) {
         console.log(':: USERS :: insert user');
-        db(DB_NAME).insert(req.body);
+        db(DB_NAME).insert(req.body).then(function (user) {
+            res.send(user);
+        }, function (err) {
+            res.status(500).send({ error: err });
+        });
     });
 
 
@@ -32,10 +36,12 @@ router.route('/server/api/users/:id')
     })
     .put(function (req, res) {
         console.log(':: USERS :: update user / id : ' + req.params.id);
-        var id = req.params.id,
-            user = req.body;
-        var upUser = db(DB_NAME).updateById(id, user);
-        res.send(upUser);
+        var id = req.params.id;
+        db(DB_NAME).updateById(id, req.body).then(function (user) {
+            res.send(user);
+        }, function (err) {
+            res.status(500).send({ error: err });
+        });
     })
     .delete(function (req, res) {
         console.log(':: USERS :: delete user / id : ' + req.params.id);
