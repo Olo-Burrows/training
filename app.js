@@ -10,6 +10,7 @@ var db = require('./db/config');
 
 var trainings = require('./routes/trainings');
 var users = require('./routes/users');
+var sessions = require('./routes/sessions');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use('/bower_components', express.static(path.join(__dirname, 'bower_componen
 
 app.use('/', trainings);
 app.use('/', users);
+app.use('/', sessions);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

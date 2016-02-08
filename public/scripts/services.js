@@ -36,7 +36,6 @@ app.service("UsersService", function ($http) {
     var API_URI = '/server/api/users';
 
     return {
-
         fetch: function () {
             return $http.get(API_URI);
         },
@@ -64,7 +63,6 @@ app.service("TrainingsService", function ($http) {
     var API_URI = '/server/api/trainings';
 
     return {
-
         fetch: function () {
             return $http.get(API_URI);
         },
@@ -79,6 +77,40 @@ app.service("TrainingsService", function ($http) {
         
         update: function (training) {
             return $http.put(API_URI + "/" + training.id, training);
+        },
+
+        remove: function (id) {
+            return $http.delete(API_URI + "/" + id);
+        }
+    };
+});
+
+app.service("SessionsService", function ($http) {
+    var API_URI = '/server/api/sessions';
+
+    return {
+        fetch: function () {
+            return $http.get(API_URI);
+        },
+
+        fetchOne: function (id) {
+            return $http.get(API_URI + '/' + id);
+        },
+        
+        fetchPastFromTrainingId: function (trainingId) {
+            return $http.get(API_URI + '/past/trainingId/' + trainingId);
+        },
+        
+        fetchComingFromTrainingId: function (trainingId) {
+            return null;
+        },
+
+        create: function (session) {
+            return $http.post(API_URI, session);
+        },
+        
+        update: function (session) {
+            return $http.put(API_URI + "/" + session.id, session);
         },
 
         remove: function (id) {

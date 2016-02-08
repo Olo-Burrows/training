@@ -21,7 +21,11 @@ router.route('/server/api/trainings')
     })
     .post(function (req, res) {
         console.log(':: TRAININGS :: insert training');
-        db(DB_NAME).insert(req.body);
+        db(DB_NAME).insert(req.body).then(function (training) {
+            res.send(training);
+        }, function (err) {
+            res.status(500).send({ error: err });
+        });
     });
 
 
@@ -33,10 +37,9 @@ router.route('/server/api/trainings/:id')
     })
     .put(function (req, res) {
         console.log(':: TRAININGS :: update training / id : ' + req.params.id);
-        var id = req.params.id,
-            training = req.body;
-        var upTraining = db(DB_NAME).updateById(id, training);
-        res.send(upTraining);
+        var id = req.params.id;
+        db(DB_NAME).updateById(id, req.body);
+        res.send();
     })
     .delete(function (req, res) {
         console.log(':: TRAININGS :: delete training / id : ' + req.params.id);

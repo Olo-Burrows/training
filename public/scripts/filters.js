@@ -7,3 +7,11 @@ app.filter("duration", function () {
        return out;
    };
 });
+
+app.filter("hours", function () {
+   return function (input) {
+       var out = input + ' heure';
+       if (input > 1) out += 's';
+       return out;
+   };
+});

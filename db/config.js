@@ -1,13 +1,14 @@
 // DB 
 const low = require('lowdb');
-//low.mixin(require('underscore-db'));
 const storage = require('lowdb/file-async');
+
+const db = low('_data/db.json', { storage: storage });
+db._.mixin(require('underscore-db'));
+
 //const _   = require('underscore');
 //const _db = require('underscore-db');
 //_.mixin(_db);
 
-const db = low('_data/db.json', { storage: storage });
-db._.mixin(require('underscore-db'));
 
 //console.log(module);
 
@@ -73,20 +74,34 @@ db._.mixin(require('underscore-db'));
         console.log(':: DB CONFIG :: init users');
         
         db('users').insert({
-            id: 'luke',
-            name: 'Luke SKYWALKER',
-            password: 'luke'
+            id: 'jb',
+            lastname: 'BOUYER',
+            firstname: 'Julien',
+            password: 'jb',
+            site: 'Nantes',
+            role: ''
         });
         db('users').insert({
-            id: 'han',
-            name: 'Han SOLO',
-            password: 'han'
+            id: 'admin',
+            lastname: 'admin',
+            firstname: '',
+            password: 'admin',
+            site: 'Nantes',
+            role: 'admin'
         });
-        db('users').insert({
-            id: 'leia',
-            name: 'Leia ORGANA',
-            password: 'leia'
-        });
+    }
+})(db);
+
+(function (db) {
+    console.log(':: DB CONFIG :: sessions');
+//    console.log(db);
+    
+    var sessions = db('sessions');
+    console.log(':: DB CONFIG :: sessions size');
+    console.log(sessions.size());
+    
+    if (sessions.size() == 0) {
+        console.log(':: DB CONFIG :: init sessions');
     }
 })(db);
 

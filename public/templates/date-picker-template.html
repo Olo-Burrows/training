@@ -1,0 +1,7 @@
+<div class="sftm-date-picker">
+    <input type="text" class="form-control" uib-datepicker-popup ng-model="selectedDate" is-open="popup.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+    <!--<input type="text" class="form-control" ng-model="selectedDate"  close-text="Close" />-->
+    <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="openPicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+    </span>
+</div>
