@@ -6,7 +6,7 @@ app.service("LoginService", function (UsersService, $rootScope) {
         login: function (iduser, password) {
             var user,
                 logged = false;
-            
+
             UsersService.fetchOne(iduser).success(function (user) {
                 if (user && user.password == password) {
                     logged = true;
@@ -47,7 +47,7 @@ app.service("UsersService", function ($http) {
         create: function (user) {
             return $http.post(API_URI, user);
         },
-        
+
         update: function (user) {
             return $http.put(API_URI + "/" + user.id, user);
         },
@@ -74,7 +74,7 @@ app.service("TrainingsService", function ($http) {
         create: function (training) {
             return $http.post(API_URI, training);
         },
-        
+
         update: function (training) {
             return $http.put(API_URI + "/" + training.id, training);
         },
@@ -96,19 +96,15 @@ app.service("SessionsService", function ($http) {
         fetchOne: function (id) {
             return $http.get(API_URI + '/' + id);
         },
-        
-        fetchPastFromTrainingId: function (trainingId) {
-            return $http.get(API_URI + '/past/trainingId/' + trainingId);
-        },
-        
-        fetchComingFromTrainingId: function (trainingId) {
-            return null;
+
+        fetchFromTrainingId: function (trainingId, type) {
+            return $http.get(API_URI + '/trainingId/' + trainingId + '/type/' + type);
         },
 
         create: function (session) {
             return $http.post(API_URI, session);
         },
-        
+
         update: function (session) {
             return $http.put(API_URI + "/" + session.id, session);
         },

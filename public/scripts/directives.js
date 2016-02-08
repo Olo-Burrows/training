@@ -1,6 +1,6 @@
 "use strict";
 
-app.directive("sftmTraining", function () {
+app.directive("sftmTraining", function() {
     return {
         restrict: 'E',
         replace: true,
@@ -16,12 +16,12 @@ app.directive("sftmTraining", function () {
     };
 });
 
-app.directive("checkConnection", function ($location, LoginService) {
+app.directive("checkConnection", function($location, LoginService) {
     return {
         restrict: 'AE',
         replace: false,
         scope: {},
-        link: function (scope) {
+        link: function(scope) {
             var connected = LoginService.checkConnection();
             if (!connected) {
                 $location.path("/login");
@@ -30,12 +30,12 @@ app.directive("checkConnection", function ($location, LoginService) {
     };
 });
 
-app.directive("btnDisconnect", function ($location, LoginService) {
+app.directive("btnDisconnect", function($location, LoginService) {
     return {
         restrict: 'E',
         replace: true,
-        link: function (scope) {
-            scope.disconnect = function () {
+        link: function(scope) {
+            scope.disconnect = function() {
                 LoginService.disconnect();
                 $location.path("/");
             }
@@ -44,7 +44,7 @@ app.directive("btnDisconnect", function ($location, LoginService) {
     }
 });
 
-app.directive("sftmDatePicker", function ($location, LoginService) {
+app.directive("sftmDatePicker", function($location, LoginService) {
     return {
         restrict: 'E',
         replace: true,
@@ -52,43 +52,72 @@ app.directive("sftmDatePicker", function ($location, LoginService) {
             selectedDate: '=ngModel'
         },
         templateUrl: "templates/date-picker-template.html",
-        link: function (scope) {
-            scope.today = function () {
+        link: function(scope) {
+            scope.today = function() {
                 scope.selectedDate = new Date();
             };
             scope.today();
 
-            scope.clear = function () {
+            scope.clear = function() {
                 scope.selectedDate = null;
             };
 
             // Disable weekend selection
-            scope.disabled = function (date, mode) {
+            scope.disabled = function(date, mode) {
                 return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
             };
 
             scope.minDate = scope.minDate ? null : new Date();
             scope.maxDate = new Date(2020, 5, 22);
 
-            scope.openPicker = function () {
+            scope.openPicker = function() {
                 scope.popup.opened = true;
             };
 
-            scope.setDate = function (year, month, day) {
+            scope.setDate = function(year, month, day) {
                 scope.selectedDate = new Date(year, month, day);
             };
 
             scope.dateOptions = {
                 startingDay: 1
             };
-//
-//            scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+            //
+            //            scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
             scope.format = 'dd-MM-yyyy';
-//            scope.altInputFormats = ['M!/d!/yyyy'];
+            //            scope.altInputFormats = ['M!/d!/yyyy'];
 
             scope.popup = {
                 opened: false
             };
+        }
+    }
+});
+
+app.directive("sftmDateSession", function($filter, SessionsService) {
+    return {
+        restrict: 'E',
+        replace: true,
+        scope: {
+            trainingId: '@',
+            type: '@'
+        },
+        templateUrl: 'templates/sftm-date-session-template.html',
+        link: function(scope) {
+            SessionsService.fetchFromTrainingId(scope.trainingId).success(function(sessions) {
+            // SessionsService.fetchFromTrainingId("9a6b4d36-3725-49aa-b95a-4f34ffca3815", scope.type).success(function(sessions) {
+                if (sessions) {
+                    var session, idx;
+                    if (scope.type === 'past') {
+                        idx = sessions.length - 1;
+                    } else if (scope.type === 'coming') {
+                        idx = 0;
+                    } else {
+                        console.warn("Unknown date session type");
+                    }
+                    session = Array.isArray(sessions) ? sessions[idx] : sessions;
+                    scope.dateSession = session ? $filter("formattedDate")(session.date) : "";
+                }
+            });
         }
     }
 });
