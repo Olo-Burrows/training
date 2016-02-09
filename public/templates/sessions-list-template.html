@@ -2,23 +2,25 @@
     <h4>{{title}}</h4>
     <div ng-show="!sessions || sessions.length == 0">Il n'y a pas de session {{typeMsg}}</div>
     <table class="table table-striped" ng-show="sessions &&  sessions.length > 0">
-    <thead>
-    <tr>
-        <td>#</td>
-        <td>Date</td>
-        <td>Lieu</td>
-        <td>Formateur</td>
-        <td>Temps de préparation</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="session in sessions">
-        <td>{{$index + 1}}</td>
-        <td>{{session.date | date:'dd-MM-yyyy'}}</td>
-        <td>{{session.place}}</td>
-        <td>{{session.formerid}}</td>
-        <td>{{session.time | hours}}</td>
-    </tr>
-    </tbody>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Lieu</th>
+                <th>Formateur</th>
+                <th>Temps de préparation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="session in sessions">
+                <td>{{$index + 1}}</td>
+                <td>{{session.date | date:'dd-MM-yyyy'}}</td>
+                <td>{{session.place}}</td>
+                <td>
+                    <former id="{{session.formerId}}" mode="view"></former>
+                </td>
+                <td>{{session.time | hours}}</td>
+            </tr>
+        </tbody>
     </table>
 </div>

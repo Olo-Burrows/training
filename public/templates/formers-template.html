@@ -1,0 +1,8 @@
+<span class="formers-widget">
+    <span ng-show="{{mode == 'view'}}">{{firstname}} {{lastname}}</span>
+    <span ng-show="{{mode == 'edit'}}">
+        <select name="formerSelect" id="formerSelect" ng-model="formerId">
+            <option ng-repeat="former in formers" value="{{former.id}}">{{former.firstname}}</option>
+        </select>
+    </span>
+</span>

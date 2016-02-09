@@ -179,3 +179,34 @@ app.directive("sftmSessions", function($rootScope, SessionsService) {
         }
     }
 });
+
+app.directive('former', function(UsersService) {
+    return {
+        restrict: 'E',
+        replace: true,
+        scope: {
+            mode: '@',
+            id: '@',
+            formerId: '=ngModel'
+        },
+        templateUrl: 'templates/formers-template.html',
+        controller: function($scope) {
+            $scope.$watch("id", function(formerId) {
+                if ($scope.mode == 'view' && formerId) {
+                    UsersService.fetchOne(formerId).success(function(former) {
+                        $scope.firstname = former.firstname;
+                        $scope.lastname = former.lastname;
+                    });
+                }
+            });
+
+            if ($scope.mode == 'edit') {
+                UsersService.fetch().success(function(formers) {
+                    $scope.formers = formers;
+                });
+            }
+        },
+        link: function(scope, element, attr) {
+        }
+    };
+});
