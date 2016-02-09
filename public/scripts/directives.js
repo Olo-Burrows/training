@@ -137,21 +137,16 @@ app.directive("sftmDateSession", function($filter, SessionsService) {
         },
         templateUrl: 'templates/sftm-date-session-template.html',
         link: function(scope) {
-            SessionsService.fetchFromTrainingId(scope.trainingId).success(function(sessions) {
-            // SessionsService.fetchFromTrainingId("9a6b4d36-3725-49aa-b95a-4f34ffca3815", scope.type).success(function(sessions) {
-                if (sessions) {
-                    var session, idx;
-                    if (scope.type === 'past') {
-                        idx = sessions.length - 1;
-                    } else if (scope.type === 'coming') {
-                        idx = 0;
-                    } else {
-                        console.warn("Unknown date session type");
+            if (!scope.type) {
+                console.warn("Unknown date session type");
+            } else {
+                SessionsService.fetchFromTrainingId(scope.trainingId, scope.type).success(function(sessions) {
+                    if (sessions) {
+                        var session = Array.isArray(sessions) ? sessions[0] : sessions;
+                        scope.dateSession = session ? $filter("formattedDate")(session.date) : "";
                     }
-                    session = Array.isArray(sessions) ? sessions[idx] : sessions;
-                    scope.dateSession = session ? $filter("formattedDate")(session.date) : "";
-                }
-            });
+                });
+            }
         }
     }
 });

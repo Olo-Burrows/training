@@ -49,27 +49,31 @@ router.route('/server/api/sessions/:id')
 
 router.route('/server/api/sessions/trainingId/:trainingId/type/:type')
     .get(function(req, res) {
-        console.log(':: SESSIONS :: get sessions by trainingId : ' + req.params.trainingId);
+        var trainingId = req.params.trainingId,
+            type = req.params.type;
+        console.log(':: SESSIONS :: get sessions by trainingId : ' + trainingId + ' - type : ' + type);
 
         var sessions = db(DB_NAME);
         var filtred = _(sessions.toArray())
             .chain()
             .where({
-                trainingId: req.params.trainingId
+                trainingId: trainingId
             })
             .filter(function (session) {
-                if (req.params.type == 'past') return new Date(session.date) < new Date();
-                else if (req.params.type == 'coming') return new Date(session.date) >= new Date();
+                if (type == 'past') return new Date(session.date) < new Date();
+                else if (type == 'coming') return new Date(session.date) >= new Date();
                 else {
                     console.warn("Type is undefined");
                     return [];
                 }
             })
             .sortBy(function(session) {
-                return session.date;
+                if (type == 'past') return !session.date;
+                if (type == 'coming') return session.date;
             })
             .value();
 
+        // console.log(filtred);
         res.send(filtred);
     });
 
