@@ -1,8 +1,9 @@
 <div>
     <check-connection/>
 
-    <h1 class="md-title">Liste des formations Softeam</h1>
-    <md-button class="md-primary" ng-href="#/home">Retour à l'accueil</md-button>
+    <div class="page-header">
+        <h1>Liste des formations Softeam</h1>
+    </div>
 
     <div>
         <h4>Filters</h4>
@@ -17,7 +18,7 @@
 
         <div ng-swith-when="false">
 
-            <div ui-grid="gridTrainings" class="trainings-grid"></div>
+            <!-- <div ui-grid="gridTrainings" class="trainings-grid"></div> -->
 
             <table class="table table-striped" ng-swith-when="false">
                 <thead>
@@ -56,11 +57,11 @@
                 </tbody>
             </table>
         </div>
-        <ul class="thumbnails" ng-switch-default>
+        <!-- <ul class="thumbnails" ng-switch-default>
             <li ng-repeat="training in trainings | filter:trainingText">
                 <sftm-training training="training" remove="remove($index)"></sftm-training>
             </li>
-        </ul>
+        </ul> -->
     </div>
 
 </div>

@@ -26,8 +26,9 @@ app.service("LoginService", function (UsersService, $rootScope) {
             var logged = sessionStorage.getItem("logged");
             return !logged || logged.toLowerCase() == 'false' ? false : true;
         },
-        disconnect: function () {
+        logout: function () {
             sessionStorage.setItem("logged", false);
+            $rootScope.$broadcast('logged', false);
         }
     }
 });

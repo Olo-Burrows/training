@@ -1,8 +1,6 @@
 <div class="user-form">
     <check-connection/>
 
-    <md-button class="md-primary" ng-href="#/home">Retour à l'accueil</md-button>
-
     <form name="formuser" method="post" novalidate ng-submit="submit()">
         <label for="userId">Identifiant</label>
         <input id="userId" name="id" ng-model="user.id" ng-required="true" ng-minlength="2">
