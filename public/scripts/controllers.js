@@ -83,7 +83,6 @@ app.controller("TrainingsCtrl", function($scope, $location, $filter, TrainingsSe
     };
 
     TrainingsService.fetch().success(function(resp) {
-
         resp.forEach(function(training, i) {
             var row = {},
                 training = resp[i];
@@ -152,26 +151,13 @@ app.controller("EditTrainingCtrl", function($scope, $location, $routeParams, Tra
 app.controller("ViewTrainingCtrl", function($scope, $location, $routeParams, $uibModal, TrainingsService, SessionsService)  {
     var trainingId, getSessions;
 
-    $scope.sessions = [];
     $scope.trainingClass = "training-view";
     $scope.mode = "View";
 
     trainingId = $routeParams.id;
 
-    getSessions = function() {
-        SessionsService.fetchPastFromTrainingId($scope.training.id).success(function(sessions) {
-            $scope.sessions = sessions;
-        });
-    }
-
-    $scope.$watchCollection("sessions", function(newValue, oldValue) {
-        console.log(newValue);
-        console.log(oldValue);
-    });
-
     TrainingsService.fetchOne(trainingId).success(function(resp) {
         $scope.training = resp;
-        getSessions();
     });
 
     $scope.addSession = function() {
@@ -187,7 +173,8 @@ app.controller("ViewTrainingCtrl", function($scope, $location, $routeParams, $ui
         });
 
         modalInstance.result.then(function(session) {
-            $scope.sessions.push(session);
+            // TODO Push new session in sub widget or reload sub widget
+            // $scope.sessions.push(session);
         });
     };
 });

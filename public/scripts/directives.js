@@ -44,12 +44,12 @@ app.directive("btnDisconnect", function($location, LoginService) {
     }
 });
 
-app.directive("sftmMenu", function ($location, LoginService) {
+app.directive("sftmMenu", function($location, LoginService) {
     return {
-        restrict: 'A',
+        restrict:   'A',
         replace: true,
         templateUrl: 'templates/menu-template.html',
-        link: function (scope) {
+        link: function(scope) {
             scope.connected = LoginService.checkConnection();
             scope.$on('logged', function(event, logged) {
                 if (logged) {
@@ -115,10 +115,8 @@ app.directive("sftmDatePicker", function($location, LoginService) {
             scope.dateOptions = {
                 startingDay: 1
             };
-            //
-            //            scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+
             scope.format = 'dd-MM-yyyy';
-            //            scope.altInputFormats = ['M!/d!/yyyy'];
 
             scope.popup = {
                 opened: false
@@ -135,18 +133,49 @@ app.directive("sftmDateSession", function($filter, SessionsService) {
             trainingId: '@',
             type: '@'
         },
-        templateUrl: 'templates/sftm-date-session-template.html',
-        link: function(scope) {
-            if (!scope.type) {
+        templateUrl: 'templates/date-session-template.html',
+        controller: function($scope) {
+            if (!$scope.type) {
                 console.warn("Unknown date session type");
             } else {
-                SessionsService.fetchFromTrainingId(scope.trainingId, scope.type).success(function(sessions) {
+                SessionsService.fetchFromTrainingId($scope.trainingId, $scope.type).success(function(sessions) {
                     if (sessions) {
                         var session = Array.isArray(sessions) ? sessions[0] : sessions;
-                        scope.dateSession = session ? $filter("formattedDate")(session.date) : "";
+                        $scope.dateSession = session ? $filter("formattedDate")(session.date) : "";
                     }
                 });
             }
+        }
+    }
+});
+
+app.directive("sftmSessions", function($rootScope, SessionsService) {
+    return {
+        restrict: 'E',
+        replace: false,
+        scope: {
+            trainingId: '@',
+            type: '@'
+        },
+        templateUrl: 'templates/sessions-list-template.html',
+        controller: function($scope) {
+            $scope.sessions = [];
+
+            if ($scope.type === "coming") {
+                $scope.title = "Liste des sessions à venir";
+                $scope.typeMsg = "à venir";
+            } else if ($scope.type === "past") {
+                $scope.title = "Liste des sessions passées";
+                $scope.typeMsg = "passées";
+            }
+
+            $scope.$watch("trainingId", function(trainingId) {
+                if (trainingId) {
+                    SessionsService.fetchFromTrainingId(trainingId, $scope.type).success(function(sessions) {
+                        $scope.sessions = sessions;
+                    });
+                }
+            });
         }
     }
 });

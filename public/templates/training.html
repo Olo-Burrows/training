@@ -32,30 +32,10 @@
         <br>
         <div ng-show="mode == 'View'">
             <button type="submit" class="btn btn-primary btn-sm" ng-disabled="formtraining.$invalid" ng-click="addSession()"><i class="glyphicon glyphicon-plus"></i>Ajouter une session</button>
-            <h4>Liste des sessions à venir</h4>
-            <div ng-show="!sessions || sessions.length == 0">Il n'y a pas de session</div>
-            <table class="table table-striped" ng-show="sessions &&  sessions.length > 0">
-            <thead>
-            <tr>
-                <td>#</td>
-                <td>Date</td>
-                <td>Lieu</td>
-                <td>Formateur</td>
-                <td>Temps de préparation</td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="session in sessions">
-                <td>{{$index + 1}}</td>
-                <td>{{session.date | date:'dd-MM-yyyy'}}</td>
-                <td>{{session.place}}</td>
-                <td>{{session.formerid}}</td>
-                <td>{{session.time | hours}}</td>
-            </tr>
-            </tbody>
-            </table>
 
-            <h4>Liste des sessions passées</h4>
+            <sftm-sessions training-id="{{training.id}}" type="past"></sftm-sessions>
+
+            <sftm-sessions training-id="{{training.id}}" type="coming"></sftm-sessions>
         </div>
         <div ng-show="mode != 'View'">
             <button type="submit" class="btn btn-primary btn-sm" ng-disabled="formtraining.$invalid">Enregistrer</button>
