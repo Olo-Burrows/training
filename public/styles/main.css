@@ -27,13 +27,13 @@ nav.navbar button.btn-logout {
     margin: 1.1em 1.4em 0 0;
     background: transparent;
     border: 0 transparent;
-    color: inherit;
+    color: #eceeef;
 }
 nav.navbar button.btn-logout:hover {
-    color: inherit;
+    color: #1e5579;
     border: 1px;
-    background-color: #fff;
-    border-color: #ccc;
+    background-color: #eceeef;
+    border-color: #eceeef;
 }
 
 section.section-main {
