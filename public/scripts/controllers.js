@@ -160,6 +160,9 @@ app.controller("ViewTrainingCtrl", function($scope, $location, $routeParams, $ui
         $scope.training = resp;
     });
 
+    $scope.pastSession = {};
+    $scope.comingSession = {};
+
     $scope.addSession = function() {
         var modalInstance = $uibModal.open({
             animation: true,
@@ -173,8 +176,11 @@ app.controller("ViewTrainingCtrl", function($scope, $location, $routeParams, $ui
         });
 
         modalInstance.result.then(function(session) {
-            // TODO Push new session in sub widget or reload sub widget
-            // $scope.sessions.push(session);
+            if (session.date < new Date()) {
+                $scope.pastSession.reload();
+            } else {
+                $scope.comingSession.reload();
+            }
         });
     };
 });

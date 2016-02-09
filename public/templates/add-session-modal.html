@@ -26,8 +26,7 @@
         </div>
         <div class="control-group">
             <label class="control-label">Formateur : </label>
-            <!--            <director mode="edit" ng-model="session.director"></director>-->
-            <input type="text" ng-model="session.fomerId" class="form-control">
+            <former ng-model="session.formerId" mode="edit"></former>
         </div>
         <div class="control-group" ng-class="{error : sessionForm.inputTime.$error.min || sessionForm.inputTime.$error.max}">
             <label class="control-label">Temps de préparation (en heures) :</label>

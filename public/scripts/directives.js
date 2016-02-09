@@ -149,13 +149,14 @@ app.directive("sftmDateSession", function($filter, SessionsService) {
     }
 });
 
-app.directive("sftmSessions", function($rootScope, SessionsService) {
+app.directive("sftmSessions", function(SessionsService) {
     return {
         restrict: 'E',
         replace: false,
         scope: {
             trainingId: '@',
-            type: '@'
+            type: '@',
+            update: '&'
         },
         templateUrl: 'templates/sessions-list-template.html',
         controller: function($scope) {
@@ -169,13 +170,21 @@ app.directive("sftmSessions", function($rootScope, SessionsService) {
                 $scope.typeMsg = "passées";
             }
 
+            // scope.internalUpdate = scope.update || {};
+
+            $scope.update.reload = function () {
+                SessionsService.fetchFromTrainingId($scope.trainingId, $scope.type).success(function(sessions) {
+                    $scope.sessions = sessions;
+                });
+            };
+
             $scope.$watch("trainingId", function(trainingId) {
                 if (trainingId) {
-                    SessionsService.fetchFromTrainingId(trainingId, $scope.type).success(function(sessions) {
-                        $scope.sessions = sessions;
-                    });
+                    $scope.update.reload();
                 }
             });
+        },
+        link: function (scope, element, attrs) {
         }
     }
 });
