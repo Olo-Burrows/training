@@ -198,16 +198,38 @@ app.directive("former", function(UsersService) {
                         $scope.firstname = former.firstname;
                         $scope.lastname = former.lastname;
                     });
-                } else {
-                    $scope.firstname = "<i>Pas de formateur</i>";
                 }
             });
 
             if ($scope.mode == 'edit') {
-                UsersService.fetch().success(function(formers) {
+                UsersService.fetchFromRole("former").success(function(formers) {
                     $scope.formers = formers;
                 });
             }
         }
+    };
+});
+
+app.directive("site", function() {
+    return {
+        restrict: 'E',
+        replace: false,
+        scope: {
+            mode: '@',
+            site: '=ngModel'
+        },
+        templateUrl: 'templates/sites-template.html'
+    };
+});
+
+app.directive("role", function() {
+    return {
+        restrict: 'E',
+        replace: false,
+        scope: {
+            mode: '@',
+            role: '=ngModel'
+        },
+        templateUrl: 'templates/roles-template.html'
     };
 });

@@ -6,11 +6,6 @@ const db = low('_data/db.json', { storage: storage });
 db._(require('underscore'));
 db._.mixin(require('underscore-db'));
 
-//const _   = require('underscore');
-//const _db = require('underscore-db');
-//_.mixin(_db);
-
-
 //console.log(module);
 
 (function (db) {

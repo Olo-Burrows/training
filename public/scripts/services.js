@@ -45,6 +45,10 @@ app.service("UsersService", function ($http) {
             return $http.get(API_URI + '/' + id);
         },
 
+        fetchFromRole: function (role) {
+            return $http.get(API_URI + '/role/' + role);
+        },
+
         create: function (user) {
             return $http.post(API_URI, user);
         },

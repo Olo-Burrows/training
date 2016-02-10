@@ -26,6 +26,14 @@ app.config(function ($routeProvider) {
     }).when('/users/edit/:id', {
         templateUrl: 'templates/user.html',
         controller: 'EditUserCtrl'
+    }).when('/admin', {
+        templateUrl: 'templates/admin.html',
+        controller: 'AdminCtrl'
+    }).when('/users-admin', {
+        templateUrl: 'templates/users-list.html',
+        controller: 'UsersCtrl'
+    }).when('/help', {
+        templateUrl: 'templates/help.html'
     }).otherwise({
         templateUrl: 'templates/home.html'
     });

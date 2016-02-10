@@ -1,32 +1,31 @@
 <div class="user-form">
     <check-connection/>
 
-    <form name="formuser" method="post" novalidate ng-submit="submit()">
+    <form name="formuser" method="post" novalidate ng-submit="submit()" class="form-horizontal">
         <label for="userId">Identifiant</label>
-        <input id="userId" name="id" ng-model="user.id" ng-required="true" ng-minlength="2">
+        <input id="userId" name="id" ng-model="user.id" ng-required="true" ng-minlength="2" ng-disabled="isEdit" class="form-control">
         <div ng-show="formuser.userId.$invalid">
             <div ng-show="formuser.userId.$error.required" class="error">Obligatoire !</div>
             <div ng-show="formuser.userId.$error.minlength" class="error">Minimum 2 caractères</div>
         </div>
         <br>
         <label for="userLastname">Nom</label>
-        <input id="userLastname" name="lastname" ng-model="user.lastname">
+        <input id="userLastname" name="lastname" ng-model="user.lastname" class="form-control">
         <br>
         <label for="userFirstname">Prénom</label>
-        <input id="userFirstname" name="firstname" ng-model="user.firstname">
+        <input id="userFirstname" name="firstname" ng-model="user.firstname" class="form-control">
+        <br>
+        <label for="userEmail">E-mail</label>
+        <input id="userEmail" name="email" ng-model="user.email" class="form-control">
         <br>
         <label for="userPassword">Mot de passe</label>
-        <input id="userPassword" name="password" type="password" ng-model="user.password">
+        <input id="userPassword" name="password" type="password" ng-model="user.password" class="form-control">
         <br>
         <label for="userSite">Site de rattachement</label>
-        <select id="userSite" name="site" ng-model="user.site">
-            <option value="Nantes">Nantes</option>
-            <option value="Rennes">Rennes</option>
-            <option value="Paris">Paris</option>
-        </select>
+        <site ng-model="user.site"></site>
         <br>
         <label for="userRole">Rôle</label>
-        <input id="userRole" name="role" ng-model="user.role">
+        <role ng-model="user.role"></role>
         <br>
         <button type="button" class="btn btn-primary btn-sm" ng-click="back()">Annuler</button>
         <button type="submit" class="btn btn-primary btn-sm" ng-disabled="formtraining.$invalid">Enregistrer</button>

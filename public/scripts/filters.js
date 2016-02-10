@@ -10,7 +10,7 @@ app.filter("duration", function () {
 
 app.filter("hours", function () {
    return function (input) {
-       var out = input + ' heure';
+       var out = input ? input + ' heure' : '';
        if (input > 1) out += 's';
        return out;
    };

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../db/config');
+var _ = require('underscore');
 
 const DB_NAME = 'users';
 
@@ -44,5 +45,18 @@ router.route('/server/api/users/:id')
         console.log(':: USERS :: delete user / id : ' + req.params.id);
         var user = db(DB_NAME).removeById(req.params.id);
         res.send(user);
+    });
+
+
+router.route('/server/api/users/role/:role')
+    .get(function (req, res) {
+        console.log(':: USERS :: get user for role : ' + req.params.role);
+        var users = db(DB_NAME);
+        var filtred = _(users.toArray())
+            .chain()
+            .where({
+                role: req.params.role
+            });
+        res.send(filtred);
     });
 module.exports = router;

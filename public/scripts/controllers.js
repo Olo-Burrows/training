@@ -232,6 +232,8 @@ app.controller("UsersCtrl", function($scope, $location, UsersService) {
 });
 
 app.controller("UserCtrl", function($scope, $location, UsersService) {
+    $scope.isEdit = false;
+
     $scope.submit = function() {
         UsersService.create($scope.user);
         $scope.user = {};
@@ -247,6 +249,7 @@ app.controller("UserCtrl", function($scope, $location, UsersService) {
 app.controller("EditUserCtrl", function($scope, $location, $routeParams, UsersService) {
 
     var userId = $routeParams.id;
+    $scope.isEdit = true;
 
     UsersService.fetchOne(userId).success(function(user) {
         $scope.user = user;
@@ -261,5 +264,11 @@ app.controller("EditUserCtrl", function($scope, $location, $routeParams, UsersSe
     $scope.back = function() {
         $scope.user = {};
         $location.path("/formers");
+    };
+});
+
+app.controller("AdminCtrl", function ($scope, $location) {
+    $scope.gotoUsers = function () {
+        $location.path("/users-admin");
     };
 });

@@ -7,6 +7,7 @@ nav.bg-inverse {
     background-color: #1e5579;
 }
 nav.navbar-dark.bg-inverse .navbar-brand {
+    font-weight: bold;
     color: #fff;
 }
 nav.navbar-dark.bg-inverse .navbar-nav .nav-link {
@@ -60,6 +61,9 @@ footer.footer-main {
 }
 footer.footer-main span {
     font-size: 11px;
+}
+footer.footer-main img.softeam-logo {
+    float: right;
 }
 
 ul {
@@ -120,4 +124,67 @@ div.sftm-date-picker .form-control {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     display: table-cell;
+}
+
+
+/************************/
+/**   ADMINISTRATION   **/
+/************************/
+
+div.admin div.admin-dashboard {
+    width: 620px;
+    height: 300px;
+    margin: 20px auto;
+}
+div.admin div.admin-dashboard .user,
+div.admin div.admin-dashboard .trainings,
+div.admin div.admin-dashboard .sessions,
+div.admin div.admin-dashboard .sites {
+    overflow: hidden;
+    border: 1px solid #ddd;
+    background: #1e5579;
+    border-radius: 5px;
+    padding: 10px;
+    width: 145px;
+    height: 145px;
+    float: left;
+}
+
+div.admin div.admin-dashboard .user:hover,
+div.admin div.admin-dashboard .trainings:hover,
+div.admin div.admin-dashboard .sessions:hover,
+div.admin div.admin-dashboard .sites:hover {
+    cursor: pointer;
+}
+
+div.admin div.admin-dashboard .user .content,
+div.admin div.admin-dashboard .trainings .content,
+div.admin div.admin-dashboard .sessions .content,
+div.admin div.admin-dashboard .sites .content {
+    overflow: hidden;
+    border-radius: 10px;
+    width: 124px;
+    height: 124px;
+}
+div.admin div.admin-dashboard .user,
+div.admin div.admin-dashboard .trainings,
+div.admin div.admin-dashboard .sessions {
+    margin-right: 8px;
+}
+
+div.admin div.admin-dashboard .content {
+    background: no-repeat 50% 40%;
+    background-size: 80px;
+}
+div.admin div.admin-dashboard .user .content {
+    background-image: url(/img/User-Group-256.png);
+}
+div.admin div.admin-dashboard .trainings .content {
+    background-image: url(/img/Projector-Screen-256.png);
+}
+div.admin div.admin-dashboard .sessions .content {
+    background-image: url(/img/Date-256.png);
+}
+div.admin div.admin-dashboard .sites .content {
+    background-image: url(/img/Office-01-256.png);
 }
