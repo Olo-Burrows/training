@@ -139,9 +139,12 @@ app.directive("sftmDateSession", function($filter, SessionsService) {
                 console.warn("Unknown date session type");
             } else {
                 SessionsService.fetchFromTrainingId($scope.trainingId, $scope.type).success(function(sessions) {
-                    if (sessions) {
-                        var session = Array.isArray(sessions) ? sessions[0] : sessions;
+                    var session = Array.isArray(sessions) ? sessions[0] : sessions;
+                    if (session) {
                         $scope.dateSession = session ? $filter("formattedDate")(session.date) : "";
+                        // $scope.formerId = session ? session.formerId : "";
+                        // } else {
+                        // $scope.hideme = true;
                     }
                 });
             }
@@ -154,43 +157,26 @@ app.directive("sftmSessions", function(SessionsService) {
         restrict: 'E',
         replace: false,
         scope: {
-            trainingId: '@',
             type: '@',
-            update: '&'
+            sessions: '=ngModel'
         },
         templateUrl: 'templates/sessions-list-template.html',
         controller: function($scope) {
             $scope.sessions = [];
-
-            if ($scope.type === "coming") {
-                $scope.title = "Liste des sessions à venir";
-                $scope.typeMsg = "à venir";
-            } else if ($scope.type === "past") {
-                $scope.title = "Liste des sessions passées";
-                $scope.typeMsg = "passées";
-            }
-
-            // scope.internalUpdate = scope.update || {};
-
-            $scope.update.reload = function () {
-                SessionsService.fetchFromTrainingId($scope.trainingId, $scope.type).success(function(sessions) {
-                    $scope.sessions = sessions;
-                });
-            };
-
-            $scope.$watch("trainingId", function(trainingId) {
-                if (trainingId) {
-                    $scope.update.reload();
-                }
-            });
-
             $scope.remove = function(index) {
                 SessionsService.remove($scope.sessions[index].id).success(function(resp) {
                     $scope.sessions.splice(index, 1);
                 });
             };
         },
-        link: function (scope, element, attrs) {
+        link: function(scope, element, attrs) {
+            if (scope.type === "coming") {
+                scope.title = "Liste des sessions à venir";
+                scope.typeMsg = "à venir";
+            } else if (scope.type === "past") {
+                scope.title = "Liste des sessions passées";
+                scope.typeMsg = "passées";
+            }
         }
     }
 });
@@ -212,6 +198,8 @@ app.directive("former", function(UsersService) {
                         $scope.firstname = former.firstname;
                         $scope.lastname = former.lastname;
                     });
+                } else {
+                    $scope.firstname = "<i>Pas de formateur</i>";
                 }
             });
 
@@ -220,8 +208,6 @@ app.directive("former", function(UsersService) {
                     $scope.formers = formers;
                 });
             }
-        },
-        link: function(scope, element, attr) {
         }
     };
 });

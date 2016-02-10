@@ -149,10 +149,12 @@ app.controller("EditTrainingCtrl", function($scope, $location, $routeParams, Tra
 });
 
 app.controller("ViewTrainingCtrl", function($scope, $location, $routeParams, $uibModal, TrainingsService, SessionsService)  {
-    var trainingId, getSessions;
+    var trainingId, loadPastSessions, loadComingSessions;
 
     $scope.trainingClass = "training-view";
     $scope.mode = "View";
+    $scope.pastSessions = [];
+    $scope.comingSessions = [];
 
     trainingId = $routeParams.id;
 
@@ -160,8 +162,13 @@ app.controller("ViewTrainingCtrl", function($scope, $location, $routeParams, $ui
         $scope.training = resp;
     });
 
-    $scope.pastSession = {};
-    $scope.comingSession = {};
+    SessionsService.fetchFromTrainingId(trainingId, 'past').success(function(sessions) {
+        $scope.pastSessions = sessions;
+    });
+
+    SessionsService.fetchFromTrainingId(trainingId, 'coming').success(function(sessions) {
+        $scope.comingSessions = sessions;
+    });
 
     $scope.addSession = function() {
         var modalInstance = $uibModal.open({
@@ -177,9 +184,9 @@ app.controller("ViewTrainingCtrl", function($scope, $location, $routeParams, $ui
 
         modalInstance.result.then(function(session) {
             if (session.date < new Date()) {
-                $scope.pastSession.reload();
+                $scope.pastSessions.push(session);
             } else {
-                $scope.comingSession.reload();
+                $scope.comingSessions.push(session);
             }
         });
     };
