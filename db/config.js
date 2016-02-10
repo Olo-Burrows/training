@@ -27,28 +27,28 @@ db._.mixin(require('underscore-db'));
             name: "AngularJS",
             description: "AngularJS est un framework JavaScript libre et open-source développé par Google.",
             requirement: "Maîtrise du langage JavaScript",
-            link: "https://git.fake-url.fr/angularjs-formation",
+            link: "https://git.fake-url/angularjs-formation",
             duration: 4
         });
         db('trainings').insert({
             name: "Java POO",
             description: "Java est le nom de marque d'une technique informatique développée initialement par Sun Microsystems puis par Oracle : la « technologie Java™ ».\n\nJava est utilisé dans une grande variété de plates-formes depuis les systèmes embarqués et les téléphones mobiles, les ordinateurs individuels, les serveurs, les applications d’entreprise, les superordinateurs, etc.",
             requirement: "",
-            link: "https://git.fake-url.fr/java-poo-formation",
+            link: "https://git.fake-url/java-poo-formation",
             duration: 4
         });
         db('trainings').insert({
             name: "JSF2",
             description: "JavaServer Faces (abrégé en JSF) est un framework Java, pour le développement d'applications Web.",
             requirement: "Maîtrise du développement Java, connaissances du pattern MVC.",
-            link: "https://git.fake-url.fr/jsf2-formation",
+            link: "https://git.fake-url/jsf2-formation",
             duration: 2
         });
         db('trainings').insert({
             name: "Formation HTML et CSS",
             description: "L’Hypertext Markup Language, généralement abrégé HTML, est le format de données conçu pour représenter les pages web.\n\nLes feuilles de style en cascade1, généralement appelées CSS de l'anglais Cascading Style Sheets, forment un langage informatique qui décrit la présentation des documents HTML et XML.",
             requirement: "",
-            link: "https://git.fake-url.fr/html-css-formation",
+            link: "https://git.fake-url/html-css-formation",
             duration: 2
         });
     }
