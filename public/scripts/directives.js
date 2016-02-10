@@ -16,6 +16,22 @@ app.directive("sftmTraining", function() {
     };
 });
 
+app.directive("trainingName", function (TrainingsService) {
+    return {
+        restrict: 'E',
+        replace: true,
+        scope: {
+            trainingId: "@"
+        },
+        template: "<span>{{name}}</span>",
+        link: function (scope, element, attr) {
+            TrainingsService.fetchOne(scope.trainingId).success(function (training) {
+                scope.name = training.name;
+            });
+        }
+    };
+});
+
 app.directive("checkConnection", function($location, LoginService) {
     return {
         restrict: 'AE',

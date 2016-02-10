@@ -32,6 +32,9 @@ app.config(function ($routeProvider) {
     }).when('/users-admin', {
         templateUrl: 'templates/users-list.html',
         controller: 'UsersCtrl'
+    }).when('/sessions-admin', {
+        templateUrl: 'templates/sessions-list.html',
+        controller: 'SessionsCtrl'
     }).when('/help', {
         templateUrl: 'templates/help.html'
     }).otherwise({

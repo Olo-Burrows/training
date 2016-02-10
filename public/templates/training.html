@@ -19,6 +19,10 @@
         <div ng-show="mode == 'View'">{{training.description}}</div>
         <textarea id="trainingDescription" ng-model="training.description" class="form-control" ng-show="mode != 'View'"></textarea>
 
+        <label for="trainingRequirement">Pré-requis</label>
+        <div ng-show="mode == 'View'">{{training.requirement}}</div>
+        <textarea id="trainingRequirement" ng-model="training.requirement" class="form-control" ng-show="mode != 'View'"></textarea>
+
         <label for="trainingName">Durée</label>
         <span ng-show="mode == 'View'">{{training.duration | duration}}</span>
         <input id="trainingDuration" type="number" name="duration" ng-model="training.duration" class="form-control" ng-show="mode != 'View'">
@@ -31,7 +35,8 @@
 
         <br>
         <div ng-show="mode == 'View'">
-            <button type="submit" class="btn btn-primary btn-sm" ng-disabled="formtraining.$invalid" ng-click="addSession()">Ajouter une session</button>
+            <button type="submit" class="btn btn-success btn-sm" ng-click="update()">Modifier</button>
+            <button type="submit" class="btn btn-primary btn-sm" ng-click="addSession()">Ajouter une session</button>
 
             <sftm-sessions ng-model="pastSessions" type="past"></sftm-sessions>
 

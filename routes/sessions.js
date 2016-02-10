@@ -18,7 +18,14 @@ router.route('/server/api/sessions')
     .get(function(req, res) {
         console.log(':: SESSIONS :: get sessions');
         var sessions = db(DB_NAME);
-        res.send(sessions);
+        var filtred = _(sessions.toArray())
+            .chain()
+            .sortBy(function(session) {
+                return session.date;
+            })
+            .value();
+
+        res.send(filtred);
     })
     .post(function(req, res) {
         console.log(':: SESSIONS :: insert session');

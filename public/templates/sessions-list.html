@@ -1,0 +1,39 @@
+<div>
+    <check-connection/>
+
+    <div class="page-header">
+        <h1>Liste des sessions</h1>
+    </div>
+
+    <div ng-show="!sessions || sessions.length == 0">Il n'y a pas de session</div>
+    <table class="table table-striped" ng-show="sessions &&  sessions.length > 0">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Formation</th>
+                <th>Date</th>
+                <th>Lieu</th>
+                <th>Formateur</th>
+                <th>Temps de préparation</th>
+                <th><!--Actions--></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="session in sessions">
+                <td>{{$index + 1}}</td>
+                <td><training-name training-id="{{session.trainingId}}"></training-name></td>
+                <td>{{session.date | date:'dd-MM-yyyy'}}</td>
+                <td>{{session.place}}</td>
+                <td>
+                    <former id="{{session.formerId}}" mode="view"></former>
+                </td>
+                <td>{{session.time | hours}}</td>
+                <td>
+                    <button class="btn btn-danger btn-xs" aria-label="Supprimer" ng-click="remove($index)">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

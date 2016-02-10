@@ -190,6 +190,10 @@ app.controller("ViewTrainingCtrl", function($scope, $location, $routeParams, $ui
             }
         });
     };
+
+    $scope.update = function () {
+        $location.path("/trainings/edit/" + $scope.training.id);
+    };
 });
 
 app.controller("CreateSessionCtrl", function($scope, $uibModalInstance, trainingId, SessionsService) {
@@ -270,5 +274,19 @@ app.controller("EditUserCtrl", function($scope, $location, $routeParams, UsersSe
 app.controller("AdminCtrl", function ($scope, $location) {
     $scope.gotoUsers = function () {
         $location.path("/users-admin");
+    };
+    $scope.gotoSessions = function () {
+        $location.path("/sessions-admin");
+    };
+});
+
+app.controller("SessionsCtrl", function ($scope, SessionsService) {
+    SessionsService.fetch().success(function(sessions) {
+        $scope.sessions = sessions;
+    });
+    $scope.remove = function(index) {
+        SessionsService.remove($scope.sessions[index].id).success(function(resp) {
+            $scope.sessions.splice(index, 1);
+        });
     };
 });
