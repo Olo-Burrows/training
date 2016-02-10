@@ -11,10 +11,7 @@
     <form name="sessionForm" class="form-horizontal">
         <div class="control-group" ng-class="{error : sessionForm.inputDate.$error.pattern}">
             <label class="control-label">Date de début :</label>
-                <sftm-date-picker ng-model="session.date"></sftm-date-picker>
-<!--            <sftm-date-picker ng-model="session.date"></sftm-date-picker>-->
-<!--            <input type="text" name="inputDate" ng-model="session.releaseYear" ng-pattern="/(19|20)\d\d/">-->
-<!--            <span class="help-block" ng-show="sessionForm.inputDate.$error.pattern">L'année n'est pas valide</span>-->
+            <sftm-date-picker ng-model="session.date"></sftm-date-picker>
         </div>
         <div class="control-group">
             <label class="control-label">Lieu :</label>
