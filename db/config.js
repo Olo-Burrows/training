@@ -23,43 +23,34 @@ db._.mixin(require('underscore-db'));
 
     if (trainings.size() == 0) {
         console.log(':: DB CONFIG :: init trainings');
-
         db('trainings').insert({
-//            id: 0,
             name: "AngularJS",
-            description: "La formation AngularJS est top !",
-            link: "https://git.softeam.fr/angularjs-formation",
-            duration: 3
-        });
-        db('trainings').insert({
-//            id: 1,
-            name: "Java POO",
-            description: "Formation à Java et la programmation orientée objets.",
-            link: "https://git.softeam.fr/java-poo-formation",
+            description: "AngularJS est un framework JavaScript libre et open-source développé par Google.",
+            requirement: "Maîtrise du langage JavaScript",
+            link: "https://git.fake-url.fr/angularjs-formation",
             duration: 4
         });
         db('trainings').insert({
-//            id: 2,
+            name: "Java POO",
+            description: "Java est le nom de marque d'une technique informatique développée initialement par Sun Microsystems puis par Oracle : la « technologie Java™ ».\n\nJava est utilisé dans une grande variété de plates-formes depuis les systèmes embarqués et les téléphones mobiles, les ordinateurs individuels, les serveurs, les applications d’entreprise, les superordinateurs, etc.",
+            requirement: "",
+            link: "https://git.fake-url.fr/java-poo-formation",
+            duration: 4
+        });
+        db('trainings').insert({
             name: "JSF2",
-            description: "Formation JSF2 pour tout savoir sur JavaServer Faces v2.",
-            link: "https://git.softeam.fr/jsf2-formation",
+            description: "JavaServer Faces (abrégé en JSF) est un framework Java, pour le développement d'applications Web.",
+            requirement: "Maîtrise du développement Java, connaissances du pattern MVC.",
+            link: "https://git.fake-url.fr/jsf2-formation",
             duration: 2
         });
         db('trainings').insert({
-//            id: 3,
-            name: "Formation HTML JavaScript",
-            description: "Cette formation détient les bases sur HTML et JavaScript.",
-            link: "https://git.softeam.fr/html-js-formation",
+            name: "Formation HTML et CSS",
+            description: "L’Hypertext Markup Language, généralement abrégé HTML, est le format de données conçu pour représenter les pages web.\n\nLes feuilles de style en cascade1, généralement appelées CSS de l'anglais Cascading Style Sheets, forment un langage informatique qui décrit la présentation des documents HTML et XML.",
+            requirement: "",
+            link: "https://git.fake-url.fr/html-css-formation",
             duration: 2
         });
-        db('trainings').insert({
-//            id: 4,
-            name: "ABC",
-            description: "Formation Alphabet",
-            link: "www",
-            duration: 10
-        });
-//        console.log(db);
     }
 })(db);
 
@@ -78,6 +69,7 @@ db._.mixin(require('underscore-db'));
             id: 'jb',
             lastname: 'BOUYER',
             firstname: 'Julien',
+            mail: 'julienbouyer@gmail.com',
             password: 'jb',
             site: 'Nantes',
             role: ''
@@ -86,6 +78,7 @@ db._.mixin(require('underscore-db'));
             id: 'admin',
             lastname: 'admin',
             firstname: '',
+            mail: 'admin@fake-url.com',
             password: 'admin',
             site: 'Nantes',
             role: 'admin'
