@@ -76,7 +76,7 @@ app.controller("TrainingsCtrl", function($scope, $location, $filter, TrainingsSe
                 '<i class="glyphicon glyphicon-edit"></i>' +
                 '</a>' +
                 '<button class="btn btn-danger btn-xs" aria-label="Supprimer" ng-click="grid.appScope.remove(index)">' +
-                '<i class="glyphicon glyphicon-remove"></i>' +
+                '<i class="glyphicon glyphicon-trash"></i>' +
                 '</button>'
         }],
         data: []
