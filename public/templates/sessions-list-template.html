@@ -9,6 +9,9 @@
                 <th>Lieu</th>
                 <th>Formateur</th>
                 <th>Temps de préparation</th>
+                <th>
+                    <!--Actions-->
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +23,11 @@
                     <former id="{{session.formerId}}" mode="view"></former>
                 </td>
                 <td>{{session.time | hours}}</td>
+                <td>
+                    <button class="btn btn-danger btn-xs" aria-label="Supprimer" ng-click="remove($index)" ng-show="type == 'coming'">
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>

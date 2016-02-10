@@ -183,13 +183,19 @@ app.directive("sftmSessions", function(SessionsService) {
                     $scope.update.reload();
                 }
             });
+
+            $scope.remove = function(index) {
+                SessionsService.remove($scope.sessions[index].id).success(function(resp) {
+                    $scope.sessions.splice(index, 1);
+                });
+            };
         },
         link: function (scope, element, attrs) {
         }
     }
 });
 
-app.directive('former', function(UsersService) {
+app.directive("former", function(UsersService) {
     return {
         restrict: 'E',
         replace: true,
