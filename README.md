@@ -1,6 +1,6 @@
-# SOFTEAM TRAINING
+# TRAINING
 
-## GESTION DES FORMATIONS SOFTEAM
+## GESTION DES FORMATIONS
 
 ### Install
 
@@ -17,4 +17,3 @@ Run : `npm install`
 In debug mode :
 
 `DEBUG=myapp:* npm start`
-

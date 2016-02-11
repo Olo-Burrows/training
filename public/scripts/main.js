@@ -1,6 +1,6 @@
 "use strict";
 
-var app = angular.module("softeam-training", [ 'ngRoute', 'ui.bootstrap', 'ui.grid' ]);
+var app = angular.module("training", [ 'ngRoute', 'ui.bootstrap', 'ui.grid' ]);
 
 app.config(function ($routeProvider) {
     $routeProvider.when('/login', {
