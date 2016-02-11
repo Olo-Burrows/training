@@ -106,21 +106,21 @@ div.trainings-grid {
 }
 
 
-li div.sftm-training {
+li div.training {
     padding-left: 10px;
 }
-li div.sftm-training div {
+li div.training div {
     padding-left: 10px;
 }
-li div.sftm-training button {
+li div.training button {
     margin: 10px;
 }
 
-div.sftm-date-picker {
+div.date-picker {
     display: table;
     width: 200px;
 }
-div.sftm-date-picker .form-control {
+div.date-picker .form-control {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     display: table-cell;

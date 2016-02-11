@@ -58,12 +58,12 @@ app.controller("TrainingsCtrl", function($scope, $location, $filter, TrainingsSe
             name: 'Prochaine session',
             field: 'getComingSession()',
             enableCellEdit: false,
-            cellTemplate: '<sftm-date-session id="{{row.entity.id}}" type="coming"></sftm-date-session>'
+            cellTemplate: '<date-session id="{{row.entity.id}}" type="coming"></date-session>'
         }, {
             name: 'Dernière session',
             field: 'getPastSession()',
             enableCellEdit: false,
-            cellTemplate: '<sftm-date-session training-id="{{row.entity.id}}" type="past"></sftm-date-session>'
+            cellTemplate: '<date-session training-id="{{row.entity.id}}" type="past"></date-session>'
         }, {
             name: '',
             field: 'actions',

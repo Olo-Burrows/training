@@ -38,9 +38,9 @@
             <button type="submit" class="btn btn-success btn-sm" ng-click="update()">Modifier</button>
             <button type="submit" class="btn btn-primary btn-sm" ng-click="addSession()">Ajouter une session</button>
 
-            <sftm-sessions ng-model="pastSessions" type="past"></sftm-sessions>
+            <sessions ng-model="pastSessions" type="past"></sessions>
 
-            <sftm-sessions ng-model="comingSessions" type="coming"></sftm-sessions>
+            <sessions ng-model="comingSessions" type="coming"></sessions>
         </div>
         <div ng-show="mode != 'View'">
             <button type="submit" class="btn btn-primary btn-sm" ng-disabled="formtraining.$invalid">Enregistrer</button>

@@ -1,6 +1,6 @@
 "use strict";
 
-app.directive("sftmTraining", function() {
+app.directive("training", function() {
     return {
         restrict: 'E',
         replace: true,
@@ -60,7 +60,7 @@ app.directive("btnDisconnect", function($location, LoginService) {
     }
 });
 
-app.directive("sftmMenu", function($location, LoginService) {
+app.directive("headerMenu", function($location, LoginService) {
     return {
         restrict:   'A',
         replace: true,
@@ -94,7 +94,7 @@ app.directive("sftmMenu", function($location, LoginService) {
     }
 });
 
-app.directive("sftmDatePicker", function($location, LoginService) {
+app.directive("datePicker", function($location, LoginService) {
     return {
         restrict: 'E',
         replace: true,
@@ -141,7 +141,7 @@ app.directive("sftmDatePicker", function($location, LoginService) {
     }
 });
 
-app.directive("sftmDateSession", function($filter, SessionsService) {
+app.directive("dateSession", function($filter, SessionsService) {
     return {
         restrict: 'E',
         replace: true,
@@ -168,7 +168,7 @@ app.directive("sftmDateSession", function($filter, SessionsService) {
     }
 });
 
-app.directive("sftmSessions", function(SessionsService) {
+app.directive("sessions", function(SessionsService) {
     return {
         restrict: 'E',
         replace: false,
